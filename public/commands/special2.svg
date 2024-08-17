@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533 533" width="533" height="533">
+	<title>btm</title>
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: none;stroke: #3da294;stroke-miterlimit:100;stroke-width: 16 } 
+		.t1 { font-size: 128px;fill: #3da294;font-weight: 341;font-family: ".", "Shapiro 115 Plus Extd" } 
+	</style>
+	<path id="Ellipse 1" class="s0" d="m267 21c137.5 0 249 109.9 249 245.5 0 135.6-111.5 245.5-249 245.5-137.5 0-249-109.9-249-245.5 0-135.6 111.5-245.5 249-245.5z"/>
+	<text id="S2" style="transform: matrix(1,0,0,1,-81,218)" >
+		<tspan x="181.2" y="92.7" class="t1">S</tspan><tspan  y="92.7" class="t1">2</tspan><tspan  y="92.7" class="t1">
+</tspan>
+	</text>
+</svg>
