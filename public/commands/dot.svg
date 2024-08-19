@@ -1,11 +1,1 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82" width="82" height="82">
-	<title>plus-svg</title>
-	<style>
-		tspan { white-space:pre } 
-		.t0 { font-size: 64px;fill: #ffffff;font-weight: 341;font-family: ".", "Shapiro 115 Plus Extd" } 
-	</style>
-	<text id="." style="transform: matrix(1,0,0,1,-6,36)" >
-		<tspan x="30.5" y="46.3" class="t0">.
-</tspan>
-	</text>
-</svg>
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 163 162" width="163" height="162"><style>.a{fill:#e7e7e7}</style><path class="a" d="m123.4 162h-86v-68.6h86z"/></svg>

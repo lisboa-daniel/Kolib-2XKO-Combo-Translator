@@ -18,12 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #1c1d21;
 }
 
 @layer utilities {
@@ -33,6 +28,10 @@ body {
 }
 
 body input {
-  background-color: azure;
-  color: black;
+  background-color: #484b55;
+  color: white;
+}
+
+.title{
+  font-family: 'font-shapiro95';
 }
