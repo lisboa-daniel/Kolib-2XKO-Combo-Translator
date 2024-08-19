@@ -5,7 +5,7 @@ import {generateIcons, translateCombo} from '@/app/scripts/translator';
 import { useState } from "react";
 import { ReactNode } from "react";
 import { CommandIconObject, CommandObject } from "./scripts/definitions";
-import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { Box, Button, FormControlLabel, FormGroup, Modal, Switch, Typography } from "@mui/material";
 import Title from "./ui/title";
 import localFont from "next/font/local";
 
@@ -17,7 +17,18 @@ const boldFont = localFont({ src: [
   },],
   variable: '--font-shapiro75h' });
 
-  
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  color: '#000000',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 export default function Home() {
 
   const [comboInput, setComboInput] = useState('d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2');
@@ -26,6 +37,10 @@ export default function Home() {
   const [useD, setUseD] = useState(true);
   const [ignoreDot, setIgnoreDot] = useState(false)
 
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   
   const handleClick = (comboInput: string) => {
   const [comboText, comboArray] =  translateCombo(comboInput, {
@@ -53,6 +68,23 @@ export default function Home() {
               <input className={'w-full text-xl p-2 '} defaultValue={comboInput} onChange={(e) => setComboInput(e.target.value)} name="combo" id="combo" type="text"/>
               <input className={`text-xl p-2 ml-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold ${boldFont.className}`} value={'GO'} type="submit" onClick={() => handleClick(comboInput)}/>
             </div>
+
+            <button className={`text-nm p-2 ml-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold ${boldFont.className} w-[auto] mt-2`} onClick={handleOpen}>Command List</button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Text in a modal
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                </Typography>
+              </Box>
+            </Modal>
 
         </div>
         
