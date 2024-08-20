@@ -114,12 +114,12 @@ export const COMMANDS: Command[] = [
   },
   {
     key: "(h)",
-    icon: "default_icon.svg", // Ymight specfic icon be added
+    icon: "critical_strike.svg", // Ymight specfic icon be added
     alias: ["critical strike"],
   },
   {
     key: "\\dh",
-    icon: "default_icon.svg", // might specfic icon be added 
+    icon: "cross_up.svg", // might specfic icon be added 
     alias: ["cross-up"],
   },
 
@@ -136,12 +136,12 @@ export const COMMANDS: Command[] = [
   },
   {
     key: "ft",
-    icon: "default_icon.svg", // might need a specific icon for assist action 1
+    icon: "assist_action1.svg", // might need a specific icon for assist action 1
     alias: ["assist action 1"],
   },
   {
     key: "bt",
-    icon: "default_icon.svg", // might need a specific icon for assist action 2
+    icon: "assist_action2.svg", // might need a specific icon for assist action 2
     alias: ["assist action 2"],
   },
   {
@@ -229,8 +229,12 @@ export function generateIcons(combo_array : Command[]): CommandObject[] {
                 "ff": 42,
                 "ff2": 52,
                 "(t)": 90,
+                "bt": 90,
+                "ft": 90,
                 "(": 16,
-                ")": 16
+                ")": 16,
+                "\\dh": 90,
+                "(h)": 90
    
               };
 
