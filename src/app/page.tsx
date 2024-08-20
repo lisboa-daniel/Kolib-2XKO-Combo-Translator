@@ -100,14 +100,14 @@ const realTimeUpdate = (comboInput : string) => {
 
 
   const [comboLines, setComboLines] = useState<CommandObjectList[]> ([{
-    name: 'default',
+    name: 'Default row',
     sequence: []
   }]);
 
   const handlerAddRow = () => {
     setComboLines( [...comboLines, {
       
-      name: 'newline'+(comboLines.length-1).toString(),
+      name: `newline ${(comboLines.length-1).toString()} ${new Date().toLocaleString()}`,
       sequence: []
     }])
 
@@ -116,15 +116,24 @@ const realTimeUpdate = (comboInput : string) => {
     
   }  
 
+  const handlerDeleteRow = (name : string) => {
+    setComboLines(comboLines.filter(line => line.name != name))
+    setInputHistory(inputHistory.filter(input => input != inputHistory[activeLine]));
 
-  const changeActiveLine = (idx : number) =>{
+    setActiveLine(comboLines.length>1 ? activeLine-1 : comboLines.length-1);
+    setActiveLine(activeLine<0? 0 : activeLine )
+    
+  } 
+
+
+  const handlerChangeActiveLine = (idx : number) =>{
     console.log(`inputHistory[idx] = ${inputHistory[idx]}`)
     setComboInput(inputHistory[idx]);
     setActiveLine(idx);
 
   }
 
-  const changeLineName = () => {
+  const handlerRenameLine = () => {
     window.alert("to be implemented");
   }
 
@@ -204,10 +213,10 @@ const realTimeUpdate = (comboInput : string) => {
             <Switch
             checked={useD}
             onChange={(e) => setUseD(e.target.checked)}
-             inputProps={{ 'aria-label': 'Use Dash as (D) button' }
+             inputProps={{ 'aria-label': 'Use Dash as D button on icon display' }
              }/>} 
             
-            label="Use Dash as (D) button" />
+            label="Use Dash as D button on icon display" />
           
 
           <FormControlLabel control={
@@ -249,8 +258,21 @@ const realTimeUpdate = (comboInput : string) => {
               //render the combo lines
               comboLines.map(line => (
                 <div className="flex flex-col">
-                <button className={`text-nm p-2 text-[#1c1c1c] bg-[#64d3f5] cursor-pointer hover:bg-[#398da7] font-extrabold ${boldFont.className} w-[auto] mt-2  ${comboLines[activeLine].name == line.name ? '' :'hidden'}`} onClick={changeLineName}>Edit name</button> 
-                <button onClick={() => changeActiveLine(
+
+                <div className='flex flex-row'>
+                  <button className={`text-nm p-2 text-[#1c1c1c] bg-[#64d3f5] cursor-pointer hover:bg-[#398da7] font-extrabold ${boldFont.className} w-[auto] mt-2  ${
+                    
+                    comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
+                    
+                    
+                    }`} onClick={handlerRenameLine}>Edit name</button> 
+
+                  <button className={`text-nm p-2 text-[#1c1c1c] bg-[#f56464] cursor-pointer hover:bg-[#a13535] font-extrabold ${boldFont.className} w-[auto] mt-2  ${ comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'}`} onClick={() => handlerDeleteRow(line.name)}>Delete row</button> 
+                </div>
+
+
+
+                <button onClick={() => handlerChangeActiveLine(
 
                   comboLines.findIndex(l => l.name == line.name)
                 
@@ -260,7 +282,7 @@ const realTimeUpdate = (comboInput : string) => {
                 
                 >
                 
-                <p className={`mb-2 text-xl font-extrabold text-left p-2 ${comboLines[activeLine].name == line.name ? 'text-[#cdf564]' :''} `}>{line.name}</p>  
+                <p className={`mb-2 text-xl font-extrabold text-left p-2 ${comboLines[activeLine] && comboLines[activeLine].name == line.name ? 'text-[#cdf564]' :''} `}>{line.name}</p>  
 
                 
                 
@@ -292,7 +314,7 @@ const realTimeUpdate = (comboInput : string) => {
           </span>
 
           <span className="mr-2">
-            <button onClick={() => handlerGeneratePng()} className={`text-nm p-2 text-[#1c1c1c] bg-[#f57564] cursor-pointer hover:bg-[#b94b3d] font-extrabold mb-2 mt-2 ${boldFont.className}`}> Generate PNG</button>
+            <button onClick={() => handlerGeneratePng()} className={`text-nm p-2 text-[#1c1c1c] bg-[#7264f5] cursor-pointer hover:bg-[#392e96] font-extrabold mb-2 mt-2 ${boldFont.className}`}> Generate PNG</button>
           </span>
 
           <span className="mr-2">
