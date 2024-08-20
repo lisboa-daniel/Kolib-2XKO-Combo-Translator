@@ -21,12 +21,6 @@ body {
   background: #1c1d21;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 body input {
   background-color: #484b55;
   color: white;

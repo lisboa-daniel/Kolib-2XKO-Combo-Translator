@@ -25,9 +25,9 @@ const style = {
   width: '800px',
   height: '600px',
   overflowY: 'scroll',
-  color: '#000000',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  color: '#dddddd',
+  bgcolor: '#1c1c1c',
+  border: '0px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -46,6 +46,8 @@ export default function Home() {
   const [comboTranslation, setComboTranslation] = useState('');
   const [useD, setUseD] = useState(true);
   const [ignoreDot, setIgnoreDot] = useState(false)
+  const [wrap, setWrap] = useState(false)
+  
 
   const [inputHistory, setInputHistory] = useState<string[]>(['d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2']);
 
@@ -131,11 +133,18 @@ const realTimeUpdate = (comboInput : string) => {
     window.alert("Function not implemented.");
   }
 
+  function handlerGenerateCode(): void {
+    window.alert("Function not implemented.");
+  }
+
   return (
-    <main className="flex min-h-screen w-full flex-col items-start justify-between pl-24 pr-24  pb-12">
-      <div className="left-0 flex flex-row w-full items-start justify-center h-[170px] z-50 fixed bg-[#1c1c1c] ">
-        <Title text="2XKO Combo Translator" style=" text-center text-4xl mt-8" />
-        <p className="text-left mt-8">&nbsp;alpha v.0.1</p>
+    <main className="flex min-h-screen w-full flex-col items-start justify-between pl-2 pr-2 md:pl-24 md:pr-24  pb-12">
+      <div className="left-0 flex flex-row w-full items-start justify-center h-[170px] z-50 fixed bg-[#0e0e0e] ">
+
+        <img src="/logo.svg" width="64px" alt="logo" className="bg-white p-[1px] mt-3 mr-2 rounded-xl "/>
+
+        <Title text="2XKO Combo Translator" style=" text-center text-2xl md:text-4xl mt-8" />
+        <p className="text-left mt-12 md:mt-8">&nbsp;alpha v.0.1</p>
       </div>
       
         <div id="form" className="flex flex-col w-[86%] top-[10%] fixed z-50">  
@@ -209,6 +218,16 @@ const realTimeUpdate = (comboInput : string) => {
              }/>} 
             
             label="Ignore Dot" />
+
+            
+          <FormControlLabel control={
+            <Switch
+            checked={wrap}
+            onChange={(e) => setWrap(e.target.checked)}
+             inputProps={{ 'aria-label': 'Ignore dot' }
+             }/>} 
+            
+            label="Wrap combo display" />
           
 
         </FormGroup>
@@ -246,7 +265,7 @@ const realTimeUpdate = (comboInput : string) => {
                 
                 
 
-                  <div className="flex w-full p-2 bg-[#33353c] h-min-12 flex-row items-start justify-start">
+                  <div className={`flex w-full p-2 bg-[#33353c] h-min-12  ${wrap? 'md:flex-wrap': 'md:flex-row'} items-start justify-start`}>
                   
                   {
                       
@@ -274,6 +293,10 @@ const realTimeUpdate = (comboInput : string) => {
 
           <span className="mr-2">
             <button onClick={() => handlerGeneratePng()} className={`text-nm p-2 text-[#1c1c1c] bg-[#f57564] cursor-pointer hover:bg-[#b94b3d] font-extrabold mb-2 mt-2 ${boldFont.className}`}> Generate PNG</button>
+          </span>
+
+          <span className="mr-2">
+            <button onClick={() => handlerGenerateCode()} className={`text-nm p-2 text-[#1c1c1c] bg-[#f564c5] cursor-pointer hover:bg-[#be3f94] font-extrabold mb-2 mt-2 ${boldFont.className}`}> Share code</button>
           </span>
 
           </div>  

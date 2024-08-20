@@ -16,7 +16,7 @@ const myFont = localFont({ src: [
 
   
 export const metadata: Metadata = {
-  title: "Kolib",
+  title: "Kolib Combo Translator",
   description: "A combo translator for 2XKO",
 };
 
