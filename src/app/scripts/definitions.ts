@@ -23,3 +23,8 @@ export interface TranslationSettings {
   igDot : boolean,
   useD : boolean,
 }
+
+export interface CommandObjectList{
+  name : string,
+  sequence: CommandObject[]
+}

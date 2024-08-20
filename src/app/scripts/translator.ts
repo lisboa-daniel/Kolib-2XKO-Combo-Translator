@@ -202,8 +202,8 @@ export function generateIcons(combo_array : Command[]): CommandObject[] {
               
               // insert custom sizes, (temporary solution) needs refactor
               const customSizeDict: CustomSizeDict = {
-                ",": 32,
-                ">": 32,
+                ",": 35,
+                ">": 35,
                 "m": 52,
                 "h": 52,
                 "l": 52,
