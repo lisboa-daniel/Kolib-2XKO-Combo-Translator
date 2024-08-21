@@ -92,11 +92,11 @@ export const COMMANDS: Command[] = [
     icon: "high_button.svg",
     alias: ["high attack"],
   },
-  {
+  /*{
     key: "dfh",
     icon: "default_icon.svg", // might need a specific icon for launcher
     alias: ["launcher"],
-  },
+  },*/
   {
     key: "s1",
     icon: "special1.svg",
@@ -107,11 +107,11 @@ export const COMMANDS: Command[] = [
     icon: "special2.svg",
     alias: ["special 2"],
   },
-  {
+  /*{
     key: "mh",
     icon: "default_icon.svg", // might specfic icon be added
     alias: ["throw"],
-  },
+  },*/
   {
     key: "(h)",
     icon: "critical_strike.svg", // Ymight specfic icon be added
@@ -334,7 +334,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                       if (commandObject.key === '.') {
 
                         //ignore dots
-                        if (!settings.igDot) {
+                        if (settings.igDot) {
                           combo_array.push(commandObject);
                         }
                       } else {

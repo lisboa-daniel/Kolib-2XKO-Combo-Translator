@@ -16,8 +16,8 @@ const myFont = localFont({ src: [
 
   
 export const metadata: Metadata = {
-  title: "Kolib Combo Translator",
-  description: "A combo translator for 2XKO",
+  title: "Kolib, a 2XKO Combo Translator tool",
+  description: "K.O Library: Input your combos and see the translation, easier to visualize and send to friends!",
 };
 
 export default function RootLayout({
