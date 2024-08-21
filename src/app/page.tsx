@@ -428,7 +428,7 @@ const realTimeUpdate = (comboInput : string) => {
                         
                         
                         }
-                      `}> <DownloadIcon/> </button>
+                      `}> Downlaod </button>
                     </span>
 
                     <span className="mr-2">
