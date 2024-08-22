@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head >
-        <meta property="og:image" content={'/splash.png'} />
+        <meta property="og:image" content={'/logo.svg'} />
       </head>
       <body className={myFont.className}>{children}</body>
     </html>
