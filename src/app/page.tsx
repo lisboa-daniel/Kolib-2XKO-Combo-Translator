@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {COMMANDS, generateIcons, translateCombo} from '@/app/scripts/translator';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { CommandIconObject, CommandObject, CommandObjectList } from "./scripts/definitions";
 import { Box, Button, FormControlLabel, FormGroup, Modal, SvgIcon, Switch, Typography } from "@mui/material";
@@ -67,7 +67,7 @@ export default function Home() {
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
   const [useD, setUseD] = useState(true);
-  const [ignoreDot, setIgnoreDot] = useState(false)
+  let [ignoreDot, setIgnoreDot] = useState(false)
   const [wrap, setWrap] = useState(false)
   const [renameInput, setRenameInput] = useState('');
 
@@ -219,16 +219,12 @@ const realTimeUpdate = (comboInput : string) => {
 
 
   function handlerIgdotChange(value : boolean){
-
-
     setIgnoreDot(value);
-    comboLines.forEach(line => {
-      handleClick(comboInput);
-    })
-    
-    
-    
   }
+
+  useEffect( () => {
+    handleClick(comboInput);
+  },[ignoreDot])
 
 
   
@@ -242,10 +238,7 @@ const realTimeUpdate = (comboInput : string) => {
         <p className="text-left mt-8">&nbsp;alpha v.0.1</p>
       </div>
 
-      
-
-    
-      
+     
         <div id="form" className="flex flex-col w-[95%] md:w-[86%] top-[10%] fixed z-50">  
             <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-[#cdf564]">Combo recipe</label> 
             <div className="flex flex-row items-center justify-between">

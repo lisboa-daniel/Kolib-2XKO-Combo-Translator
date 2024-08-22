@@ -334,7 +334,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                       if (commandObject.key === '.') {
 
                         //ignore dots
-                        if (settings.igDot) {
+                        if (!settings.igDot) {
                           combo_array.push(commandObject);
                         }
                       } else {
