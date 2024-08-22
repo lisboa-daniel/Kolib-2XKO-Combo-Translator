@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,6 +15,9 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: #1c1d21;
+  min-height: 100vh; /* Ensure body is at least as tall as the viewport */
+  margin: 0; /* Remove default margin */
+  overflow-x: hidden; /* Prevent horizontal scrolling if not needed */
 }
 
 body input {

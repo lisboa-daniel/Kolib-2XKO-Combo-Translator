@@ -3,10 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from 'next/font/local';
 
-
-const inter = Inter({ subsets: ["latin"] });
-
-
 const myFont = localFont({ src: [
   {
     path: '../../public/fonts/shapiro-35-light.otf',
@@ -16,7 +12,7 @@ const myFont = localFont({ src: [
 
   
 export const metadata: Metadata = {
-  title: "Kolib, a 2XKO Combo Translator tool",
+  title: "Kolib - 2XKO Combo Translator tool",
   description: "K.O Library: Input your combos and see the translation, easier to visualize and send to friends!",
 };
 

@@ -10,8 +10,12 @@ import Title from "./ui/title";
 import localFont from "next/font/local";
 import domToImage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
-import { GenerateComboCode } from "./scripts/util";
-import AddIcon from '@mui/icons-material';
+import { GenerateComboCode } from "./scripts/utils";
+import AddIcon, { AddCircle, AddCircleOutline, Delete, Download, Edit, Share } from '@mui/icons-material';
+
+
+
+
 
 const boldFont = localFont({ src: [
   {
@@ -204,7 +208,8 @@ const realTimeUpdate = (comboInput : string) => {
   });
 
 
-  } 
+  }
+
 
 
   function handlerGenerateCode(): void {
@@ -222,9 +227,11 @@ const realTimeUpdate = (comboInput : string) => {
     })
     
     
-
+    
   }
 
+
+  
   return (
     <main className="text-sm md:text-nm flex  w-full flex-col items-start justify-between pl-2 pr-2 md:pl-24 md:pr-24  pb-12">
       <div className="left-0 flex flex-row w-full items-start justify-center h-[170px] z-50 fixed bg-[#0e0e0e] ">
@@ -234,6 +241,8 @@ const realTimeUpdate = (comboInput : string) => {
         <Title text="2XKO Combo Translator" style=" text-center text-xl md:text-4xl mt-8" />
         <p className="text-left mt-8">&nbsp;alpha v.0.1</p>
       </div>
+
+      
 
     
       
@@ -327,6 +336,8 @@ const realTimeUpdate = (comboInput : string) => {
         {/* settings  */}
         <div id="settings" className="flex w-full flex-col mt-[180px]">
         <label className="text-left text-nm md:text-xl mt-5 font-extrabold">Settings</label>
+
+        {}
         <FormGroup >
           <FormControlLabel control={
             <Switch
@@ -392,7 +403,7 @@ const realTimeUpdate = (comboInput : string) => {
 
                     
                   <span className="mr-2">
-                      <button onClick={() => handlerAddRow()} className={`text-nm p-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold mb-2 mt-2 ${boldFont.className}
+                      <button onClick={() => handlerAddRow()} className={`flex flex-row items-center text-nm p-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold mb-2 mt-2 ${boldFont.className}
                       ${
                       
                         comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
@@ -400,39 +411,39 @@ const realTimeUpdate = (comboInput : string) => {
                         
                         }
                       
-                      `}> Add </button>
+                      `}> <AddCircle/> <label className="text-sm md:flex hidden ">New row</label></button>
                     </span>
                     <span className="mr-2">
 
-                    <button className={`text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#f56464] cursor-pointer hover:bg-[#a13535] font-extrabold ${boldFont.className} w-[auto] mt-2  ${ comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'}`} onClick={() => handlerDeleteRow(line.name)}>Delete</button>
+                    <button className={` flex flex-row items-center text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#f56464] cursor-pointer hover:bg-[#a13535] font-extrabold ${boldFont.className} w-[auto] mt-2   ${ comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'}`} onClick={() => handlerDeleteRow(line.name)}><Delete/> <label className="text-sm md:flex hidden ">Delete</label></button>
                     </span>  
 
 
                     <span className="mr-2">
 
-                    <button  className={`text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#64d3f5] cursor-pointer hover:bg-[#398da7] font-extrabold ${boldFont.className} w-[auto] mt-2  ${
+                    <button  className={` flex flex-row items-center text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#64d3f5] cursor-pointer hover:bg-[#398da7] font-extrabold ${boldFont.className} w-[auto] mt-2  ${
                       
                       comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
                       
                       
-                      }`} onClick={handleOpenRename}>Rename</button>
+                      }`} onClick={handleOpenRename}><Edit/><label className="text-sm md:flex hidden ">Rename</label></button>
                     </span>
 
 
 
                     <span className="mr-2">
-                      <button onClick={() => handlerGeneratePng()} className={`text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#7264f5] cursor-pointer hover:bg-[#392e96] font-extrabold mb-2 mt-2 ${boldFont.className}
+                      <button onClick={() => handlerGeneratePng()} className={`flex flex-row items-center text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#7264f5] cursor-pointer hover:bg-[#392e96] font-extrabold mb-2 mt-2 ${boldFont.className}
                       ${
                       
                         comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
                         
                         
                         }
-                      `}> Downlaod </button>
+                      `} aria-label="Download png"> <Download/><label className="text-sm md:flex hidden ">Download png</label> </button>
                     </span>
 
                     <span className="mr-2">
-                      <button onClick={() => handlerGenerateCode()} className={`text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#f564c5] cursor-pointer hover:bg-[#be3f94] font-extrabold mb-2 mt-2 ${boldFont.className}
+                      <button onClick={() => handlerGenerateCode()} className={`flex flex-row items-center text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#f564c5] cursor-pointer hover:bg-[#be3f94] font-extrabold mb-2 mt-2 ${boldFont.className}
                       
                       ${
                       
@@ -440,7 +451,7 @@ const realTimeUpdate = (comboInput : string) => {
                         
                         
                         }
-                      `}> Share code</button>
+                      `}> <Share/><label className="text-sm md:flex hidden ">Share code</label></button>
                     </span> 
                   </div>
 
@@ -461,7 +472,7 @@ const realTimeUpdate = (comboInput : string) => {
                 
                 
 
-                  <div id={line.name} className={`flex w-full p-2 bg-[#33353c] h-min-12  ${wrap? 'flex-wrap': 'flex-row'} items-start justify-start border-0 border-black`}>
+                  <div id={line.name} className={`flex w-full p-2 bg-[#33353c] h-min-12 ${wrap? 'flex-wrap': 'flex-row'} items-start justify-start border-0 border-black`}>
                   
                   {
                       
