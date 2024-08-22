@@ -360,7 +360,9 @@ const realTimeUpdate = (comboInput : string) => {
              label={<Typography className="text-sm md:text-nm">Ignore dots</Typography>}
 
           />
-          <FormControlLabel control={
+          <FormControlLabel 
+          className="hidden" 
+          control={
             <Switch
             
             checked={wrap}
@@ -468,7 +470,7 @@ const realTimeUpdate = (comboInput : string) => {
                 
                 
 
-                  <div id={line.name} className={`flex w-full p-2 bg-[#33353c] h-min-12 ${wrap? 'flex-wrap': 'flex-row'} items-start justify-start border-0 border-black`}>
+                  <div id={line.name} className={`w-full p-2 bg-[#33353c] flex flex-wrap md:flex-nowrap md:flex-row h-min-12 items-start justify-start border-0 border-black`}>
                   
                   {
                       
