@@ -14,6 +14,8 @@ const myFont = localFont({ src: [
 export const metadata: Metadata = {
   title: "Kolib - 2XKO Combo Translator tool",
   description: "K.O Library: Input your combos and see the translation, easier to visualize and send to friends!",
+  
+
 };
 
 export default function RootLayout({
@@ -23,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head >
+        <meta property="og:image" content={'/splash.png'} />
+      </head>
       <body className={myFont.className}>{children}</body>
     </html>
   );
