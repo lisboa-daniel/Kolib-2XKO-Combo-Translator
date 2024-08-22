@@ -1,3 +1,4 @@
+
 import { ReactNode } from "react";
 import { CommandIcon, CommandText } from "../ui/icons";
 import { Command, CommandIconObject, CommandObject, CommandTextObject, TranslationSettings } from "./definitions";
@@ -62,7 +63,7 @@ export const COMMANDS: Command[] = [
   },
   {
     key: "ff2",
-    icon: "dash.svg", 
+    icon: "dash_button.svg", 
     alias: ["forward dash"],
   },
   {
@@ -329,34 +330,34 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                     //if found generate a command object, but theres a few rules with stupid if elses
                     const commandObject = findCommand(commandAttempt);
 
+
+
                     if (commandObject) {
-                        
-                      if (commandObject.key === '.') {
+                      const cmdExceptions = ['.','ff'];
+                      if (cmdExceptions.find(cmd => cmd === commandObject.key) != undefined){
+                        switch(commandObject.key){
+                          case '.':{
+                            if (!settings.igDot) {
+                              combo_array.push(commandObject);
+                            }
+                          } break;
 
-                        //ignore dots
-                        if (!settings.igDot) {
-                          combo_array.push(commandObject);
+                          case 'ff': {
+                            if (settings.useD) {
+                               const nCommandObject = findCommand('ff2');
+                               if (nCommandObject) combo_array.push(nCommandObject);
+                              
+                            } else combo_array.push(commandObject);
+                            
+                            
+                          } break;
                         }
-                      } else {
-
-                      //switch dash from >> to D
-                      if (commandObject.key === 'ff') {
-                        if (settings.useD) {
-                          commandObject.icon = 'dash_button.svg';
-                          commandObject.key = 'ff2';
-                          combo_array.push(commandObject);
-                          
-                        }
-                      } else combo_array.push(commandObject);
                       } 
-
+                        else combo_array.push(commandObject);
                       
-                      //push command found
-                     
-                    
                       
 
-                    }
+                      }
 
                     // store the raw command
                     i += length - 1; // move index forward by the length of the found command

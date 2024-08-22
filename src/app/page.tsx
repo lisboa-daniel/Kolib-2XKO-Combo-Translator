@@ -224,7 +224,10 @@ const realTimeUpdate = (comboInput : string) => {
 
   useEffect( () => {
     handleClick(comboInput);
-  },[ignoreDot])
+  },[ignoreDot, useD])
+
+
+  
 
 
   
@@ -490,10 +493,16 @@ const realTimeUpdate = (comboInput : string) => {
 
 
           </div>  
+          
+          
 
           <footer className="bg-[#cdf564] w-full  text-gray-900 py-4 px-6 text-center font-extrabold">
           <p className="text-sm">
-            This is a free tool made by a fan for the FGC / 2XKO community. All rights reserved for Riot Games © 2024
+            This is a free tool made by a fan for the FGC / 2XKO community. All rights is reserved for Riot Games © 2024
+          </p>
+
+          <p className="text-sm">
+            Made by: @ dandy_kyun on Twitter and Discord
           </p>
 
 
