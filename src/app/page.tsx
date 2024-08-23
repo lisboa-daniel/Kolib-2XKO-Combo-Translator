@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Box, FormControlLabel, FormGroup, Modal, Switch, Typography } from "@mui/material";
 
 import Title from "./ui/title";
-import { AddCircle, Delete, Download, Edit, Share } from '@mui/icons-material';
+import { AddCircle, Delete, Download, Edit, GitHub, Share } from '@mui/icons-material';
 
 import {boldFont} from "@/app/ui/fonts";
 
@@ -532,16 +532,18 @@ const realTimeUpdate = (comboInput : string) => {
 
           
 
-          <footer className="bg-green-500 w-full  text-gray-900 py-4 px-6 text-center font-extrabold">
-          <p className="text-sm">
-            This is a free tool made by a fan for the FGC / 2XKO community. All rights is reserved for Riot Games © 2024
+        <footer className="bg-green-500 w-full text-gray-900 py-4 px-6 text-center font-extrabold text-sm">
+          <div className="flex justify-center space-x-4">
+          <p className="mt-2">
+            This is a free tool made by a fan for the FGC / 2XKO community. All rights reserved for Riot Games © 2024
           </p>
-
-          <p className="text-sm">
-            Made by: @ dandy_kyun on Twitter and Discord
-          </p>
-
+          </div>
   
+          <p>
+            Made by: @dandy_kyun on Twitter and Discord
+
+            <a href="https://github.com/lisboa-daniel/kolib" className="hover:text-white ml-2"><GitHub/> &nbsp;GitHub Repo</a>
+          </p>
         </footer>
 
         {/*<div className="flex flex-row h-2 w-full">
