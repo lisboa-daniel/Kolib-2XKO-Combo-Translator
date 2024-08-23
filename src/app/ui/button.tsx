@@ -21,16 +21,14 @@ export default function Button(
     visible=true, 
     icon,
     className,
-    bg='green-500',
-    bgHover='green-600'
+
   } : ButtonProps){
 
   
-  const _bg = `bg-${bg}`;
-  const _bgHover = `hover:bg-${bgHover}`;
   const isIconDefined = icon !== undefined;
+
   return(
-    <button onClick={onClickHandler} className={`flex justify-center items-center text-nm p-2 text-[#1c1c1c]  cursor-pointer ${_bg} } ${_bgHover} font-extrabold mb-2 mt-2 ${boldFont.className}
+    <button onClick={onClickHandler} className={`flex justify-center items-center text-nm p-2 text-[#1c1c1c]  cursor-pointer font-extrabold mb-2 mt-2 ${boldFont.className}
     ${visible ? '' :'hidden'} ${className}`}> 
       {icon} 
       

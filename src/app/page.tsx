@@ -231,7 +231,7 @@ const realTimeUpdate = (comboInput : string) => {
         <img src="/logo.svg" alt="logo" className="bg-white p-[1px] w-[48px] md:w-[64px] mt-6  md:mt-3 mr-2 ml-2 rounded-xl "/>
 
         <Title text="2XKO Combo Translator" style=" text-center text-xl md:text-4xl mt-8" />
-        <p className="text-left mt-8">&nbsp;alpha v.0.1</p>
+        <p className="text-left mt-8">&nbsp;alpha v.0.2</p>
       </div>
 
      
@@ -247,7 +247,7 @@ const realTimeUpdate = (comboInput : string) => {
             <Button
               label="Command List"
               onClickHandler={handleOpen}
-              className=" mt-2 items-end"
+              className=" mt-2 items-end bg-green-500 hover:bg-green-600"
             />  
     
             </div>
@@ -342,7 +342,8 @@ const realTimeUpdate = (comboInput : string) => {
                   <Button
                     label="Rename"
                     onClickHandler={() => handlerRenameLine(renameInput)}
-                    className="items-end mb-2 mt-2 "
+                    className="items-end mb-2 mt-2 bg-blue-500 hover:bg-blue-600"
+                
                   />  
 
                   <Button
@@ -444,6 +445,7 @@ const realTimeUpdate = (comboInput : string) => {
                           icon={<AddCircle/>}
                           onClickHandler={() => handlerAddRow()}
                           visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                          className="bg-green-500 hover:bg-green-600"
                         />
                     </span>
 
@@ -527,12 +529,7 @@ const realTimeUpdate = (comboInput : string) => {
               
             }  
 
-          <div className="flex flex-row">
-          
 
-
-          </div>  
-          
           
 
           <footer className="bg-green-500 w-full  text-gray-900 py-4 px-6 text-center font-extrabold">
@@ -547,7 +544,12 @@ const realTimeUpdate = (comboInput : string) => {
   
         </footer>
 
+        {/*<div className="flex flex-row h-2 w-full">
+            <div className="w-full bg-blue-500"/>
 
+
+        </div>  */}
+          
         </div>
  
     </main>
