@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import localFont from 'next/font/local';
 
-const myFont = localFont({ src: [
-  {
-    path: '../../public/fonts/shapiro-35-light.otf',
-    weight: '500'
-  },] });
-
+import { normalFont } from "./ui/fonts";
 
   
 export const metadata: Metadata = {
@@ -28,7 +22,7 @@ export default function RootLayout({
       <head >
         <meta property="og:image" content={'/logo.svg'} />
       </head>
-      <body className={myFont.className}>{children}</body>
+      <body className={normalFont.className}>{children}</body>
     </html>
   );
 }

@@ -1,36 +1,29 @@
 'use client';
 
-import Image from "next/image";
+import { CommandObject, CommandObjectList } from "./scripts/definitions";
 import {COMMANDS, generateIcons, translateCombo} from '@/app/scripts/translator';
+import { GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
-import { ReactNode } from "react";
-import { CommandIconObject, CommandObject, CommandObjectList } from "./scripts/definitions";
-import { Box, Button, FormControlLabel, FormGroup, Modal, SvgIcon, Switch, Typography } from "@mui/material";
+
+
+import { Box, FormControlLabel, FormGroup, Modal, Switch, Typography } from "@mui/material";
+
 import Title from "./ui/title";
-import localFont from "next/font/local";
+import { AddCircle, Delete, Download, Edit, Share } from '@mui/icons-material';
+
+import {boldFont} from "@/app/ui/fonts";
+
 import domToImage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
-import { GenerateComboCode } from "./scripts/utils";
-import AddIcon, { AddCircle, AddCircleOutline, Delete, Download, Edit, Share } from '@mui/icons-material';
+import Button  from "./ui/button";
 
-
-
-
-
-const boldFont = localFont({ src: [
-  {
-    path: '/../../public/fonts/shapiro-95-super-extd.ttf',
-    weight: '500',
-
-  },],
-  variable: '--font-shapiro75h' });
 
 const style = {
   position: 'absolute' as 'absolute',
   top: '42%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '800px',
+
   height: '600px',
   overflowY: 'scroll',
   color: '#dddddd',
@@ -45,7 +38,7 @@ const style2 = {
   top: '42%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 'autox',
+
   height: '200px',
   color: '#dddddd',
   bgcolor: '#1c1c1c',
@@ -243,14 +236,20 @@ const realTimeUpdate = (comboInput : string) => {
 
      
         <div id="form" className="flex flex-col w-[95%] md:w-[86%] top-[10%] fixed z-50">  
-            <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-[#cdf564]">Combo recipe</label> 
+            <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-green-500">Combo recipe</label> 
             <div className="flex flex-row items-center justify-between">
               <input value={comboInput} id="combo_input" className={'w-full text-sm md:text-xl p-2 '} defaultValue={comboInput} onChange={(e) => realTimeUpdate(e.target.value)} name="combo" type="text"/>
-              <input className={`text-nm md:text-xl p-2 ml-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold ${boldFont.className}`} value={'GO'} type="submit" onClick={() => handleClick(comboInput)}/>
+              <input className={`text-nm md:text-xl p-2 ml-2 text-[#1c1c1c] bg-green-500 cursor-pointer hover:bg-green-600 font-extrabold ${boldFont.className}`} value={'GO'} type="submit" onClick={() => handleClick(comboInput)}/>
             </div>
 
             <div className="w-full flex items-end justify-end">
-            <button className={`text-sm md:text-nm p-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold ${boldFont.className} mt-2  items-end`} onClick={handleOpen}>Command List</button>
+
+            <Button
+              label="Command List"
+              onClickHandler={handleOpen}
+              className=" mt-2 items-end"
+            />  
+    
             </div>
 
         </div>
@@ -262,7 +261,22 @@ const realTimeUpdate = (comboInput : string) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
               >
-              <Box sx={style}>
+              <div className={`
+                md:min-w-[800px]
+                absolute
+                top-[40%]
+                left-[50%]
+                -translate-x-1/2 -translate-y-1/2
+                md:h-[600px]
+                h-[600px]
+                bg-[#1c1c1c]
+                shadow-xl
+                p-4
+                overflow-y-scroll
+                border-2
+                border-green-400
+              `}>
+
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                 <Title text="Command usage" style=" text-center text-4xl " />
                 </Typography>
@@ -287,7 +301,7 @@ const realTimeUpdate = (comboInput : string) => {
                 </li>
               </ul>
                 </Typography>
-              </Box>
+              </div>
             </Modal>
 
 
@@ -297,7 +311,21 @@ const realTimeUpdate = (comboInput : string) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
               >
-              <Box sx={style2}>
+              <div className={`
+                min-w-[200px]
+                md:min-w-[500px]
+                absolute
+                top-[40%]
+                left-[50%]
+                -translate-x-1/2 -translate-y-1/2
+                min-h-[200px]
+                bg-[#1c1c1c]
+                shadow-xl
+                p-4
+                overflow-y-hidden
+                border-2
+                border-green-400
+              `}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                 <Title text="Rename" style=" text-center text-4xl " />
                 </Typography>
@@ -309,13 +337,25 @@ const realTimeUpdate = (comboInput : string) => {
                   
 
                   <span className="flex flex-row p-2 items-end justify-end">
-                  <button onClick={() => handlerRenameLine(renameInput)} className={`text-nm p-2 mr-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold mb-2 mt-2 ${boldFont.className}`}>Rename</button>
-                  <button onClick={handleCloseRename} className={`text-nm p-2 text-[#1c1c1c] bg-[#f57a64] cursor-pointer hover:bg-[#c95642] font-extrabold mb-2 mt-2 ${boldFont.className}`}>Cancel</button>
+  
+
+                  <Button
+                    label="Rename"
+                    onClickHandler={() => handlerRenameLine(renameInput)}
+                    className="items-end mb-2 mt-2 "
+                  />  
+
+                  <Button
+                    label="Cancel"
+                    onClickHandler={() => handleCloseRename()}
+                    className="items-end mb-2 mt-2 ml-2 bg-red-500 hover:bg-red-600"
+                  />  
+
                   </span>
                   
                 
                 </Typography>
-              </Box>
+              </div>
             </Modal>
           
           {/*  test render  */}
@@ -397,60 +437,57 @@ const realTimeUpdate = (comboInput : string) => {
                 <div className="flex flex-col" key={index}>
 
                   <div className='flex flex-row'>
-                    
-
-                    
-                  <span className="mr-2">
-                      <button onClick={() => handlerAddRow()} className={`flex flex-row items-center text-nm p-2 text-[#1c1c1c] bg-[#cdf564] cursor-pointer hover:bg-[#93b63c] font-extrabold mb-2 mt-2 ${boldFont.className}
-                      ${
-                      
-                        comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
-                        
-                        
-                        }
-                      
-                      `}> <AddCircle/> <label className="text-sm md:flex hidden ">New row</label></button>
-                    </span>
+              
                     <span className="mr-2">
-
-                    <button className={` flex flex-row items-center text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#f56464] cursor-pointer hover:bg-[#a13535] font-extrabold ${boldFont.className} w-[auto] mt-2   ${ comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'}`} onClick={() => handlerDeleteRow(line.name)}><Delete/> <label className="text-sm md:flex hidden ">Delete</label></button>
-                    </span>  
-
-
-                    <span className="mr-2">
-
-                    <button  className={` flex flex-row items-center text-xs md:text-sm p-2 text-[#1c1c1c] bg-[#64d3f5] cursor-pointer hover:bg-[#398da7] font-extrabold ${boldFont.className} w-[auto] mt-2  ${
-                      
-                      comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
-                      
-                      
-                      }`} onClick={handleOpenRename}><Edit/><label className="text-sm md:flex hidden ">Rename</label></button>
-                    </span>
-
-
-
-                    <span className="mr-2">
-                      <button onClick={() => handlerGeneratePng()} className={`flex flex-row items-center text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#7264f5] cursor-pointer hover:bg-[#392e96] font-extrabold mb-2 mt-2 ${boldFont.className}
-                      ${
-                      
-                        comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
-                        
-                        
-                        }
-                      `} aria-label="Download png"> <Download/><label className="text-sm md:flex hidden ">Download png</label> </button>
+                        <Button
+                          label="New Row"
+                          icon={<AddCircle/>}
+                          onClickHandler={() => handlerAddRow()}
+                          visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                        />
                     </span>
 
                     <span className="mr-2">
-                      <button onClick={() => handlerGenerateCode()} className={`flex flex-row items-center text-xs md:text-nm p-2 text-[#1c1c1c] bg-[#f564c5] cursor-pointer hover:bg-[#be3f94] font-extrabold mb-2 mt-2 ${boldFont.className}
-                      
-                      ${
-                      
-                        comboLines[activeLine] && comboLines[activeLine].name == line.name ? '' :'hidden'
-                        
-                        
-                        }
-                      `}> <Share/><label className="text-sm md:flex hidden ">Share code</label></button>
-                    </span> 
+                        <Button
+                          label="Rename"
+                          icon={<Edit/>}
+                          onClickHandler={() => handleOpenRename()}
+                          visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                          className="bg-blue-500 hover:bg-blue-600"
+
+                        />
+                    </span>
+
+                    <span className="mr-2">
+                        <Button
+                          label="Delete"
+                          icon={<Delete/>}
+                          onClickHandler={() => handlerDeleteRow(line.name)}
+                          visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                          className="bg-red-500 hover:bg-red-600"
+                        />
+                    </span>
+
+                    <span className="mr-2">
+                        <Button
+                          label="Download Png"
+                          icon={<Download/>}
+                          onClickHandler={() => handlerGeneratePng()}
+                          visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                          className="bg-purple-400 hover:bg-purple-500"
+                        />
+                    </span>
+
+                    <span className="mr-2">
+                        <Button
+                          label="Share code"
+                          icon={<Share/>}
+                          onClickHandler={() => handlerGeneratePng()}
+                          visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
+                          className="bg-pink-400 hover:bg-pink-500"
+                        />
+                    </span>
+                  
                   </div>
 
 
@@ -498,7 +535,7 @@ const realTimeUpdate = (comboInput : string) => {
           
           
 
-          <footer className="bg-[#cdf564] w-full  text-gray-900 py-4 px-6 text-center font-extrabold">
+          <footer className="bg-green-500 w-full  text-gray-900 py-4 px-6 text-center font-extrabold">
           <p className="text-sm">
             This is a free tool made by a fan for the FGC / 2XKO community. All rights is reserved for Riot Games © 2024
           </p>
@@ -507,14 +544,12 @@ const realTimeUpdate = (comboInput : string) => {
             Made by: @ dandy_kyun on Twitter and Discord
           </p>
 
-
+  
         </footer>
+
+
         </div>
-          
-
-
-
-       
+ 
     </main>
   );
 }
