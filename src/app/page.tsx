@@ -1,7 +1,7 @@
 'use client';
 
 import { CommandObject, CommandObjectList } from "./scripts/definitions";
-import {COMMANDS, generateIcons, translateCombo} from '@/app/scripts/translator';
+import { generateIcons, translateCombo} from '@/app/scripts/translator';
 import { GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,7 @@ import {boldFont} from "@/app/ui/fonts";
 import domToImage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
 import Button  from "./ui/button";
+import { COMMANDS } from "./scripts/dict";
 
 
 const style = {
@@ -183,7 +184,9 @@ const realTimeUpdate = (comboInput : string) => {
     console.log(node.tagName)
     return node.tagName  !== 'SPAN';
   }
-
+  const handlerShareCode = () => {
+    return window.alert("Not implemented yet! Check soon");
+  }
 
   const handlerGeneratePng = async () => {
     let test : Node = (document.getElementById(comboLines[activeLine].name) as Node);
@@ -285,9 +288,10 @@ const realTimeUpdate = (comboInput : string) => {
                     This is directly supported:
                   </p>
                 <ul className="space-y-2 text-[#cdf564] bg-[#1c1c1c] p-4 rounded-lg shadow-lg">
+
                 {COMMANDS.map(cmd => (
                   <li key={cmd.key} className="flex items-center p-2 bg-[#383838] rounded-md hover:bg-[#636262] transition-colors duration-200">
-                    <span className=" font-semibold text-[] mr-2">{cmd.key}</span>
+                    <span className=" font-semibold text-[] mr-2">{cmd.key}  {cmd.alt != "" ? 'or ' + cmd.alt : ''}</span>
                     <span className=" flex flex-row items-center justify-between text-sm text-gray-600 dark:text-gray-300">
                       {cmd.alias.map((word, index) => (
                         <span key={index} className="mr-1">{word} </span>
@@ -296,6 +300,7 @@ const realTimeUpdate = (comboInput : string) => {
                     </span>
                   </li>
                 ))}
+
                 <li className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   <span className="font-medium text-gray-700 dark:text-gray-200">anything with ( ) are read as hold</span>
                 </li>
@@ -484,7 +489,7 @@ const realTimeUpdate = (comboInput : string) => {
                         <Button
                           label="Share code"
                           icon={<Share/>}
-                          onClickHandler={() => handlerGeneratePng()}
+                          onClickHandler={() => handlerShareCode()}
                           visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
                           className="bg-pink-400 hover:bg-pink-500"
                         />
