@@ -1,6 +1,6 @@
 'use client';
 
-import { Command, CommandObject, CommandObjectList } from "./scripts/definitions";
+import { Command, CommandObject, CommandObjectList, CommandObjectListInit } from "./scripts/definitions";
 import { generateIcons, translateCombo} from '@/app/scripts/translator';
 import { GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
@@ -78,30 +78,30 @@ const onChangeComboInput = (comboInput : string) => {
   const [activeLine, setActiveLine] = useState(0);
 
 
-  const [comboLines, setComboLines] = useState<CommandObjectList[]> ([{
-    name: 'Default row',
-    sequence: []
-  }]);
+  const [comboLines, setComboLines] = useState<CommandObjectList[]> ([
+    CommandObjectListInit('Default Row', [])
+  ]);
 
   const handlerAddRow = () => {
-    setComboLines( [...comboLines, {
-      
-      name: `newline ${(comboLines.length-1).toString()} ${new Date().toLocaleString()}`,
-      sequence: []
-    }])
+    setRowCounter(rowCounter+1);
+
+    setComboLines( [...comboLines,  
+      CommandObjectListInit(`New Combo ${(rowCounter).toString()}`, [])])
 
     inputHistory.push('');
     setActiveLine(comboLines.length);
     
   }  
 
-  const handlerDeleteRow = (name : string) => {
+  const handlerDeleteRow = (id : string) => {
     if (comboLines.length > 1){
-      setComboLines(comboLines.filter(line => line.name != name))
+      setComboLines(comboLines.filter(line => line.id != id))
       setInputHistory(inputHistory.filter(input => input != inputHistory[activeLine]));
   
-      setActiveLine(comboLines.length>1 ? activeLine-1 : comboLines.length-1);
-      setActiveLine(activeLine<0? 0 : activeLine )
+      setActiveLine(comboLines.length>2 ? activeLine-1 : comboLines.length-2);
+
+      console.log(`pid: 39, comboLines.length = ${comboLines.length}`)
+      //setActiveLine(activeLine<0? 0 : activeLine )
     } else {
       window.alert("Can't delete, theres only one row left")
     }
@@ -195,6 +195,9 @@ const onChangeComboInput = (comboInput : string) => {
     setComboInput(clone.toString());
     
   }*/
+
+
+  let [rowCounter, setRowCounter] = useState(0);
 
   return (
     <main className="text-sm md:text-nm flex  w-full flex-col items-start justify-between pl-2 pr-2 md:pl-24 md:pr-24  pb-12">
@@ -447,7 +450,7 @@ const onChangeComboInput = (comboInput : string) => {
                         <Button
                           label="Delete"
                           icon={<Delete/>}
-                          onClickHandler={() => handlerDeleteRow(line.name)}
+                          onClickHandler={() => handlerDeleteRow(line.id)}
                           visible={(comboLines[activeLine] && comboLines[activeLine].name == line.name)}
                           className="bg-red-500 hover:bg-red-600"
                         />

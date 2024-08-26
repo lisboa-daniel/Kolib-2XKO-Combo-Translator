@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { GenerateComboCode } from "./utils";
 export type CommandObject = CommandIconObject | CommandTextObject;
 
 export interface CommandIconObject {
@@ -26,6 +27,15 @@ export interface TranslationSettings {
 }
 
 export interface CommandObjectList{
+  id : string,
   name : string,
   sequence: CommandObject[]
+}
+
+export const CommandObjectListInit = (name : string, sequence : CommandIconObject[]) => {
+  return {
+    id : GenerateComboCode(),
+    name : name,
+    sequence : sequence
+  }
 }

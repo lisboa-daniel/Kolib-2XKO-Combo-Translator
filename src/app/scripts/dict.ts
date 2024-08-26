@@ -58,7 +58,7 @@ export const COMMANDS: Command[] = [
     },
     {
       key: "dj",
-      icon: "upward.svg",
+      icon: "super_jump.svg",
       alias: ["super jump"],
       alt: "2j",
     },
@@ -160,13 +160,13 @@ export const COMMANDS: Command[] = [
       key: "ft",
       icon: "assist_action1.svg", // might need a specific icon for assist action 1
       alias: ["assist action 1"],
-      alt: "",
+      alt: "6t",
     },
     {
       key: "bt",
       icon: "assist_action2.svg", // might need a specific icon for assist action 2
       alias: ["assist action 2"],
-      alt: "",
+      alt: "4t",
     },
     {
       key: "+",
