@@ -1,6 +1,6 @@
 'use client';
 
-import { CommandObject, CommandObjectList } from "./scripts/definitions";
+import { Command, CommandObject, CommandObjectList } from "./scripts/definitions";
 import { generateIcons, translateCombo} from '@/app/scripts/translator';
 import { GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { Box, FormControlLabel, FormGroup, Modal, Switch, Typography } from "@mu
 
 import Title from "./ui/title";
 import { AddCircle, Delete, Download, Edit, GitHub, Share } from '@mui/icons-material';
+import CachedIcon from '@mui/icons-material/Cached';
 
 import {boldFont} from "@/app/ui/fonts";
 
@@ -17,43 +18,6 @@ import domToImage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
 import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
-
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '42%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-
-  height: '600px',
-  overflowY: 'scroll',
-  color: '#dddddd',
-  bgcolor: '#1c1c1c',
-  border: '0px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
-const style2 = {
-  position: 'absolute' as 'absolute',
-  top: '42%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-
-  height: '200px',
-  color: '#dddddd',
-  bgcolor: '#1c1c1c',
-  border: '0px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
-/*
-interface ComboListItem {
-  input : string,
-  comboTranslation: string,
-  iconCombo: CommandObject[],
-}*/
 
 export default function Home() {
 
@@ -66,15 +30,6 @@ export default function Home() {
   const [renameInput, setRenameInput] = useState('');
 
   const [inputHistory, setInputHistory] = useState<string[]>(['d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2']);
-
-  /*const[comboList, setComboList] = useState<ComboListItem[]>([
-    {
-      input: 'd.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2',
-      comboTranslation: '',
-      iconCombo: []
-    }
-  ]);*/
-
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -106,7 +61,7 @@ export default function Home() {
 
 }
 
-const realTimeUpdate = (comboInput : string) => {
+const onChangeComboInput = (comboInput : string) => {
 
   let prevInput = inputHistory;
 
@@ -171,14 +126,8 @@ const realTimeUpdate = (comboInput : string) => {
 
   }
 
-  const testNode = (
-    <div> 
-    <img src="/commands/medium_attack.svg"></img>
-    <img src="/commands/light_attack.svg"></img>
-    </div>
-  )
-   
-  const [svgResult, setSvgResult] = useState();
+
+  //const [svgResult, setSvgResult] = useState();
 
   function filter(node : any) {
     console.log(node.tagName)
@@ -207,26 +156,46 @@ const realTimeUpdate = (comboInput : string) => {
   }
 
 
-
-  function handlerGenerateCode(): void {
-    window.alert("Function not implemented.");
-  }
-
-
-
   function handlerIgdotChange(value : boolean){
     setIgnoreDot(value);
   }
 
+
+  /* effect change igdot and useD*/
   useEffect( () => {
     handleClick(comboInput);
   },[ignoreDot, useD])
 
 
   
+  const [convert, setConvert] = useState(false);
+
+  /*
+  function convertInputTo(): void {
+    setConvert(!convert)
+    const clone = comboInput.split(',');
+    let i = 0;
+
+    const directionAlias = ['f','b','u','d','ff','bb','dd','uf','ub','df','db']
 
 
-  
+    while(i < clone.length){
+      const findAlt : Command | undefined = COMMANDS.find(
+        cmd => (directionAlias.findIndex(dir => dir == cmd.key) != -1));
+      
+      if (!convert){
+        if (findAlt){
+          clone[i] =  findAlt.alt;
+        }
+      }
+
+        i++;
+    }
+    
+    setComboInput(clone.toString());
+    
+  }*/
+
   return (
     <main className="text-sm md:text-nm flex  w-full flex-col items-start justify-between pl-2 pr-2 md:pl-24 md:pr-24  pb-12">
       <div className="left-0 flex flex-row w-full items-start justify-center h-[170px] z-50 fixed bg-[#0e0e0e] ">
@@ -241,18 +210,28 @@ const realTimeUpdate = (comboInput : string) => {
         <div id="form" className="flex flex-col w-[95%] md:w-[86%] top-[10%] fixed z-50">  
             <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-green-500">Combo recipe</label> 
             <div className="flex flex-row items-center justify-between">
-              <input value={comboInput} id="combo_input" className={'w-full text-sm md:text-xl p-2 '} defaultValue={comboInput} onChange={(e) => realTimeUpdate(e.target.value)} name="combo" type="text"/>
+
+              <input value={comboInput} id="combo_input" className={'outline-none w-full text-sm md:text-xl p-2 '} defaultValue={comboInput} onChange={(e) => onChangeComboInput(e.target.value)} name="combo" type="text"/>
+
+
               <input className={`text-nm md:text-xl p-2 ml-2 text-[#1c1c1c] bg-green-500 cursor-pointer hover:bg-green-600 font-extrabold ${boldFont.className}`} value={'GO'} type="submit" onClick={() => handleClick(comboInput)}/>
             </div>
 
-            <div className="w-full flex items-end justify-end">
+            <div className="w-full flex flex-row items-center justify-end">
 
-            <Button
-              label="Command List"
-              onClickHandler={handleOpen}
-              className=" mt-2 items-end bg-green-500 hover:bg-green-600"
-            />  
-    
+            <div className="bg-black">
+
+           
+              <Button
+                label="Command List"
+                onClickHandler={handleOpen}
+                className=" m-3 items-end bg-green-500 hover:bg-green-600"
+              />  
+
+            </div>
+            
+            
+  
             </div>
 
         </div>
@@ -376,10 +355,10 @@ const realTimeUpdate = (comboInput : string) => {
 
         
         {/* settings  */}
-        <div id="settings" className="flex w-full flex-col mt-[180px]">
+        <div id="settings" className="flex flex-col mt-[180px]">
         <label className="text-left text-nm md:text-xl mt-5 font-extrabold">Settings</label>
 
-        {}
+        
         <FormGroup >
           <FormControlLabel control={
             <Switch
@@ -390,7 +369,7 @@ const realTimeUpdate = (comboInput : string) => {
              }/>} 
             
             label={<Typography className="text-sm md:text-nm">Use Dash as D button</Typography>}
-            
+            className="hover:text-green-500 transition-all hover:pl-2"
             
             />
           
@@ -404,6 +383,7 @@ const realTimeUpdate = (comboInput : string) => {
              }/>} 
             
              label={<Typography className="text-sm md:text-nm">Ignore dots</Typography>}
+             className="hover:text-green-500 transition-all hover:pl-2"
 
           />
           <FormControlLabel 
@@ -416,9 +396,7 @@ const realTimeUpdate = (comboInput : string) => {
              inputProps={{ 'aria-label': 'Ignore dot' }
              }/>} 
             
-             label={<Typography className="text-sm md:text-nm">Wrapline on combo display</Typography>}
-            
-            
+             label={<Typography className="text-sm md:text-nm">Wrapline on combo display</Typography>}     
             />
           
 

@@ -17,7 +17,7 @@ export interface Command {
   key : string,
   icon? : string,
   alias : string[],
-  alt? : string
+  alt : string
 }
 
 export interface TranslationSettings {

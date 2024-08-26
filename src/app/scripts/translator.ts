@@ -137,7 +137,8 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
            combo_array.push(
             {
               key:temp_quote_word,
-              alias:[temp_quote_word]
+              alias:[temp_quote_word],
+              alt: ''
             }
           )
 
@@ -200,14 +201,16 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                       combo_array.push({
                         key:char,
                         icon: char,
-                        alias: [char]
+                        alias: [char],
+                        alt: ''
                   })
                   } else {
                     if (char != " "){
                       combo_array.push(
                         {
                           key:char,
-                          alias:[char]
+                          alias:[char],
+                          alt: ''
                         }
                       )
                     }
