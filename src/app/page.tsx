@@ -20,7 +20,7 @@ import { COMMANDS } from "./scripts/dict";
 
 export default function Home() {
   const VERSION = 'alpha v0.2.1';
-  const [comboInput, setComboInput] = useState('d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2');
+  const [comboInput, setComboInput] = useState('d.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2');
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
   const [useD, setUseD] = useState(true);
@@ -28,7 +28,7 @@ export default function Home() {
   const [ig5, setIg5] = useState(true)
   const [renameInput, setRenameInput] = useState('');
 
-  const [inputHistory, setInputHistory] = useState<string[]>(['d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2']);
+  const [inputHistory, setInputHistory] = useState<string[]>(['d.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2']);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
