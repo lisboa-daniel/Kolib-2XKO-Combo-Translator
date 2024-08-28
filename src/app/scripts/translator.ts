@@ -61,7 +61,11 @@ export function generateIcons(combo_array : Command[]): CommandObject[] {
                 "(": 16,
                 ")": 16,
                 "\\dh": 90,
-                "(h)": 90
+                "(h)": 90,
+                "[": 16,
+                "]": 16,
+                "5": 52,
+                'bb':52,
    
               };
 
@@ -152,7 +156,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                 let command = findCommandString(commandAttempt);
 
                 if (command) {
-                    result_str += command;
+                    result_str += command + ' ';
                   
                     //if found generate a command object, but theres a few rules with stupid if elses
                     const commandObject = findCommand(commandAttempt);
@@ -160,7 +164,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
 
 
                     if (commandObject) {
-                      const cmdExceptions = ['.','ff'];
+                      const cmdExceptions = ['.','ff','5','bb'];
                       if (cmdExceptions.find(cmd => cmd === commandObject.key) != undefined){
                         switch(commandObject.key){
                           case '.':{
@@ -169,14 +173,28 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                             }
                           } break;
 
+                          case '5':{
+                            
+                            if (!settings.ig5){
+                           
+                              combo_array.push(commandObject);
+                            }
+                          }break;
+
                           case 'ff': {
                             if (settings.useD) {
                                const nCommandObject = findCommand('ff2');
                                if (nCommandObject) combo_array.push(nCommandObject);
                               
-                            } else combo_array.push(commandObject);
-                            
-                            
+                            } else combo_array.push(commandObject);     
+                          } break;
+
+                          case 'bb': {
+                            if (settings.useD) {
+                               const nCommandObject = findCommand('bb2');
+                               if (nCommandObject) combo_array.push(nCommandObject);
+                              
+                            } else combo_array.push(commandObject);     
                           } break;
                         }
                       } 
@@ -197,7 +215,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
               //if nothing is found handle special characters and ignore spaces
 
                 // special handling for commas and > symbols
-                  if (char === "," || char === ">" || char === "+" || char == '.' )  {
+                  if (char === "," || char === ">" || char === "+" || char === '.'  || char === '5')  {
                       combo_array.push({
                         key:char,
                         icon: char,
@@ -218,7 +236,7 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
                   }
                 
                 //add whatever it got
-                result_str += char; 
+                result_str += char 
             }
         }
 

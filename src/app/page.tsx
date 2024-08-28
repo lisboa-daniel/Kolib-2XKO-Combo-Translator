@@ -9,8 +9,7 @@ import { useEffect, useState } from "react";
 import { Box, FormControlLabel, FormGroup, Modal, Switch, Typography } from "@mui/material";
 
 import Title from "./ui/title";
-import { AddCircle, Delete, Download, Edit, GitHub, Share } from '@mui/icons-material';
-import CachedIcon from '@mui/icons-material/Cached';
+import { AddCircle, Circle, Delete, Download, Edit, GitHub, Share, Square } from '@mui/icons-material';
 
 import {boldFont} from "@/app/ui/fonts";
 
@@ -20,13 +19,13 @@ import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
 
 export default function Home() {
-
+  const VERSION = 'alpha v0.2.1';
   const [comboInput, setComboInput] = useState('d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2');
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
   const [useD, setUseD] = useState(true);
   let [ignoreDot, setIgnoreDot] = useState(false)
-  const [wrap, setWrap] = useState(false)
+  const [ig5, setIg5] = useState(true)
   const [renameInput, setRenameInput] = useState('');
 
   const [inputHistory, setInputHistory] = useState<string[]>(['d.L > L > M > H > S1> S1 > ff >  H > M > df.H>j.H> m>s2']);
@@ -37,6 +36,10 @@ export default function Home() {
 
 
   const [openRename, setOpenRename,] = useState(false);
+
+
+  const [openChange, setOpenChange,] = useState(false);
+
   const handleOpenRename = () => {
     setRenameInput(comboLines[activeLine].name);
     setOpenRename(true);
@@ -46,7 +49,8 @@ export default function Home() {
   const handleClick = (comboInput: string) => {
   const [comboText, comboArray] =  translateCombo(comboInput, {
     igDot: ignoreDot,
-    useD: useD
+    useD: useD,
+    ig5: ig5
   });
 
   
@@ -164,7 +168,7 @@ const onChangeComboInput = (comboInput : string) => {
   /* effect change igdot and useD*/
   useEffect( () => {
     handleClick(comboInput);
-  },[ignoreDot, useD])
+  },[ignoreDot, useD, ig5])
 
 
   
@@ -206,7 +210,7 @@ const onChangeComboInput = (comboInput : string) => {
         <img src="/logo.svg" alt="logo" className="bg-white p-[1px] w-[48px] md:w-[64px] mt-6  md:mt-3 mr-2 ml-2 rounded-xl "/>
 
         <Title text="2XKO Combo Translator" style=" text-center text-xl md:text-4xl mt-8" />
-        <p className="text-left mt-8">&nbsp;alpha v.0.2</p>
+        <p className="text-left mt-8">&nbsp;{VERSION}</p>
       </div>
 
      
@@ -284,7 +288,7 @@ const onChangeComboInput = (comboInput : string) => {
                 ))}
 
                 <li className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-                  <span className="font-medium text-gray-700 dark:text-gray-200">anything with ( ) are read as hold</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-200">anything with ( ) or [ ] can be read as hold</span>
                 </li>
               </ul>
                 </Typography>
@@ -359,9 +363,20 @@ const onChangeComboInput = (comboInput : string) => {
         
         {/* settings  */}
         <div id="settings" className="flex flex-col mt-[180px]">
+
+        <div className="mt-2 mb-2 flex flex-col">
+          <p className="text-green-400"><Circle className="w-[12px] h-[12px]"/> Tips</p>
+          <div className="ml-5 text-nm tracking-wide">
+
+          <p>You can use quotes (" ") to write anything you like to add, observations or specific notation, anything!</p>
+          <p>To me is more elegant to use ( ) or [ ] for hold buttons but feel free, you can just write "hold" too.</p>  
+          <p>Both numpad and "Tekken" movement style is supported. Check more on command list.</p>
+          </div>
+        </div>
+
         <label className="text-left text-nm md:text-xl mt-5 font-extrabold">Settings</label>
 
-        
+
         <FormGroup >
           <FormControlLabel control={
             <Switch
@@ -372,7 +387,7 @@ const onChangeComboInput = (comboInput : string) => {
              }/>} 
             
             label={<Typography className="text-sm md:text-nm">Use Dash as D button</Typography>}
-            className="hover:text-green-500 transition-all hover:pl-2"
+            className="hover:text-green-500 transition-all hover:pl-1"
             
             />
           
@@ -382,24 +397,23 @@ const onChangeComboInput = (comboInput : string) => {
             className="text-sm md:text-nm"
             checked={ignoreDot}
             onChange={(e) => handlerIgdotChange(e.target.checked)}
-             inputProps={{ 'aria-label': 'Ignore dot' }
+             inputProps={{ 'aria-label': 'Ignore dots' }
              }/>} 
             
              label={<Typography className="text-sm md:text-nm">Ignore dots</Typography>}
-             className="hover:text-green-500 transition-all hover:pl-2"
+             className="hover:text-green-500 transition-all hover:pl-1"
 
           />
-          <FormControlLabel 
-          className="hidden" 
+          <FormControlLabel  
           control={
             <Switch
-            
-            checked={wrap}
-            onChange={(e) => setWrap(e.target.checked)}
-             inputProps={{ 'aria-label': 'Ignore dot' }
+          
+            checked={ig5}
+            onChange={(e) => setIg5(e.target.checked)}
+             inputProps={{ 'aria-label': 'Ignore neutral 5' }
              }/>} 
             
-             label={<Typography className="text-sm md:text-nm">Wrapline on combo display</Typography>}     
+             label={<Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Ignore neutral "5"</Typography>}     
             />
           
 
@@ -495,13 +509,13 @@ const onChangeComboInput = (comboInput : string) => {
                 
                 
 
-                  <div id={line.name} className={`w-full p-2 bg-[#33353c] flex flex-wrap md:flex-nowrap md:flex-row h-min-12 items-start justify-start border-0 border-black`}>
+                  <div id={line.name} className={`w-full p-2 bg-[#33353c] flex flex-wrap md:flex-nowrap md:flex-row min-h-20 items-center justify-start border-0 border-black`}>
                   
                   {
                       
                     line.sequence.map((cmd, index) => (
                         
-                           <div className="border-0 mr-2"> {cmd.node} </div>
+                            <div className="mt-2 mr-2"> {cmd.node}</div>
                       ))
                   }
                   </div>
@@ -516,7 +530,59 @@ const onChangeComboInput = (comboInput : string) => {
             }  
 
 
-          
+          <Modal
+              open={openChange}
+              onClose={() => setOpenChange(false)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+              >
+              <div className={`
+                min-w-[200px]
+                md:min-w-[500px]
+                absolute
+                top-[40%]
+                left-[50%]
+                -translate-x-1/2 -translate-y-1/2
+                min-h-[200px]
+                bg-[#1c1c1c]
+                shadow-xl
+                p-4
+                overflow-y-hidden
+                border-2
+                border-green-400
+              `}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Title text="Change Log" style=" text-center text-4xl " />
+                </Typography>
+                <Typography id="modal-modal-description" className="flex flex-col" sx={{ mt: 2 }}>
+                  
+
+                  <ul>
+
+                    <li className="font-extrabold mt-2">Alpha v0.2.1 28th september 2024:<br/> 
+                        <p className="font-normal text-sm">- Support neutral in numpad notation<br/>- Result box is bigger now<br/>- Minor code quality improvements<br/>- [ and ] symbols added; as the font for general text in result was adjusted too<br/>- Tips section added<br/>- Change log added<br/>- Some missing icons were added</p>
+                    </li>
+
+                    <li className="font-extrabold mt-2">Alpha v0.2 26th september 2024:<br/> 
+                        <p className="font-normal text-sm">- Numpad notation support<br/>- Fix some style issues<br/>- Minor quality improvements</p>
+                    </li>
+
+
+
+                    
+                  </ul>
+
+                  <Button
+                    label="Close"
+                    onClickHandler={() => setOpenChange(false)}
+                    className="items-end mb-2 mt-2 ml-2 bg-red-500 hover:bg-red-600"
+                  />  
+
+                  
+                
+                </Typography>
+              </div>
+            </Modal>  
 
         <footer className="bg-green-500 w-full text-gray-900 py-4 px-6 text-center font-extrabold text-sm">
           <div className="flex justify-center space-x-4">
@@ -525,11 +591,11 @@ const onChangeComboInput = (comboInput : string) => {
           </p>
           </div>
   
-          <p>
-            Made by: @dandy_kyun on Twitter and Discord
+          <p>Made by: @dandy_kyun on Twitter and Discord </p>
 
-            <a href="https://github.com/lisboa-daniel/kolib" className="hover:text-white ml-2"><GitHub/> &nbsp;GitHub Repo</a>
-          </p>
+          <div className="flex flex-row justify-center w-full items-center">
+            <a href="https://github.com/lisboa-daniel/kolib" className="hover:text-white ml-2 underline"><GitHub className="mr-1"/>GitHub Repo</a> <p className="hover:text-white ml-2 cursor-pointer underline" onClick={() => setOpenChange(true)}>  Change Log</p>
+          </div>
         </footer>
 
         {/*<div className="flex flex-row h-2 w-full">

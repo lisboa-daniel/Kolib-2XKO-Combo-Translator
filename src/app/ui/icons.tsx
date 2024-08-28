@@ -1,4 +1,5 @@
 import { CommandIconObject, CommandTextObject } from "../scripts/definitions";
+import { boldFont } from "./fonts";
 
 
 interface CommandIconProps{
@@ -32,7 +33,7 @@ export function CommandIcon({src, w =82, h=82, alt, style } : CommandIconProps) 
 export function CommandText({text, style } : CommandTextProps) {
 
   const CommandObject : CommandTextObject = {
-    node: <p className="mb-2">{text}</p>,
+    node: <div className="flex items-center justify-center  h-full"> <p className={`text-lg md:text-2xl  ${boldFont.className}`}>{text}</p></div>,
     style : style
 
   }

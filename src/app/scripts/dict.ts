@@ -3,6 +3,12 @@ import { Command } from "./definitions";
 export const COMMANDS: Command[] = [
     // Movement commands
     {
+      key: "5",
+      icon: "neutral2.svg",
+      alias: ["standing"],
+      alt: "stand",
+    },
+    {
       key: "d",
       icon: "crounch.svg",
       alias: ["down"],
@@ -76,7 +82,13 @@ export const COMMANDS: Command[] = [
     },
     {
       key: "bb",
-      icon: "backward.svg", // might need a specific icon for backward dash
+      icon: "backdash.svg", // might need a specific icon for backward dash
+      alias: ["backward dash"],
+      alt: "44",
+    },
+    {
+      key: "bb2",
+      icon: "backdash_button.svg", // might need a specific icon for backward dash
       alias: ["backward dash"],
       alt: "44",
     },
@@ -134,7 +146,7 @@ export const COMMANDS: Command[] = [
       key: "(h)",
       icon: "critical_strike.svg", // Ymight specfic icon be added
       alias: ["critical strike"],
-      alt: "",
+      alt: "[h]",
     },
     {
       key: "\\dh",
@@ -154,7 +166,7 @@ export const COMMANDS: Command[] = [
       key: "(t)",
       icon: "team_button_hold.svg", 
       alias: ["quick tag"],
-      alt: "",
+      alt: "[t]",
     },
     {
       key: "ft",
@@ -204,4 +216,18 @@ export const COMMANDS: Command[] = [
       alias: [")"],
       alt: "",
     },
+    {
+      key: "[",
+      icon: "open_pam2.svg",
+      alias: ["["],
+      alt: "",
+    },
+    {
+      key: "]",
+      icon: "close_pam2.svg",
+      alias: ["]"],
+      alt: "",
+    },
+
+    
 ];
