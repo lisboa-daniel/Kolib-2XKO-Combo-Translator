@@ -19,7 +19,7 @@ interface CommandTextProps{
 export function CommandIcon({src, w =82, h=82, alt, style } : CommandIconProps) {
     
     const CommandObject : CommandIconObject = {
-      node: <img src={src} width={w} height={h} style={{minWidth:`${w/2}px`, minHeight:`${h/2}px`}} alt={alt}/>,
+      node: <img src={src} width={w} height={h} style={{maxWidth:`${w/2}px`, maxHeight:`${h/2}px`}} alt={alt}/>,
       size : w,
       style : style
 

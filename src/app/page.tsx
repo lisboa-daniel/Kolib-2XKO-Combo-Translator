@@ -19,7 +19,7 @@ import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
 
 export default function Home() {
-  const VERSION = 'alpha v0.2.1';
+  const VERSION = 'alpha v0.2.2';
   const [comboInput, setComboInput] = useState('d.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2');
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
@@ -509,7 +509,7 @@ const onChangeComboInput = (comboInput : string) => {
                 
                 
 
-                  <div id={line.name} className={`w-full p-2 bg-[#33353c] flex flex-wrap md:flex-nowrap md:flex-row min-h-20 items-center justify-start border-0 border-black`}>
+                  <div id={line.name} className={`w-full p-2 bg-[#33353c] flex flex-wrap min-h-20 items-center justify-start border-0 border-black`}>
                   
                   {
                       
@@ -558,6 +558,10 @@ const onChangeComboInput = (comboInput : string) => {
                   
 
                   <ul>
+                    
+                  <li className="font-extrabold mt-2">Alpha v0.2.2 28th september 2024:<br/> 
+                        <p className="font-normal text-sm">- Combo display now wrap properly</p>
+                    </li>
 
                     <li className="font-extrabold mt-2">Alpha v0.2.1 28th september 2024:<br/> 
                         <p className="font-normal text-sm">- Support neutral in numpad notation<br/>- Result box is bigger now<br/>- Minor code quality improvements<br/>- [ and ] symbols added; as the font for general text in result was adjusted too<br/>- Tips section added<br/>- Change log added<br/>- Some missing icons were added</p>
