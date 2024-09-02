@@ -1,6 +1,6 @@
 'use client';
 
-import { Command, CommandObject, CommandObjectList, CommandObjectListInit } from "./scripts/definitions";
+import { ChangeLog, Command, CommandObject, CommandObjectList, CommandObjectListInit } from "./scripts/definitions";
 import { generateIcons, translateCombo} from '@/app/scripts/translator';
 import { CompressCombo, DecompressCombo, GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
@@ -19,6 +19,7 @@ import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
 import ZoomSlider from "./ui/zoomSlider";
 import { useRouter, useSearchParams } from 'next/navigation';
+import { CHANGELOG, VERSION } from "./scripts/changelog";
 
 export default function Home() {
 
@@ -34,7 +35,7 @@ export default function Home() {
 
     
 
-  const VERSION = 'alpha v0.2.2';
+  
 
   
   const initialCombo = retrieveParams();
@@ -587,18 +588,22 @@ const onChangeComboInput = (comboInput : string) => {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
               >
+              
               <div className={`
-                min-w-[200px]
+                min-w-[380px]
+
                 md:min-w-[500px]
                 absolute
                 top-[40%]
                 left-[50%]
                 -translate-x-1/2 -translate-y-1/2
                 min-h-[200px]
+                max-h-[600px]
+                overflow-y-scroll
                 bg-[#1c1c1c]
                 shadow-xl
                 p-4
-                overflow-y-hidden
+                
                 border-2
                 border-green-400
               `}>
@@ -608,30 +613,29 @@ const onChangeComboInput = (comboInput : string) => {
                 <Typography id="modal-modal-description" className="flex flex-col" sx={{ mt: 2 }}>
                   
 
+                <Button
+                    label="Close"
+                    onClickHandler={() => setOpenChange(false)}
+                    className="items-end mb-2 mt-2 ml-2 bg-red-500 hover:bg-red-600 sticky"
+                  />  
                   <ul>
-                    
-                  <li className="font-extrabold mt-2">Alpha v0.2.2 28th september 2024:<br/> 
-                        <p className="font-normal text-sm">- Combo display now wrap properly</p>
-                    </li>
-
-                    <li className="font-extrabold mt-2">Alpha v0.2.1 28th september 2024:<br/> 
-                        <p className="font-normal text-sm">- Support neutral in numpad notation<br/>- Result box is bigger now<br/>- Minor code quality improvements<br/>- [ and ] symbols added; as the font for general text in result was adjusted too<br/>- Tips section added<br/>- Change log added<br/>- Some missing icons were added</p>
-                    </li>
-
-                    <li className="font-extrabold mt-2">Alpha v0.2 26th september 2024:<br/> 
-                        <p className="font-normal text-sm">- Numpad notation support<br/>- Fix some style issues<br/>- Minor quality improvements</p>
-                    </li>
+                    {
+                      CHANGELOG.map( (log:ChangeLog, index) => (
+                        <li key={index} className="font-extrabold mt-2">{log.title}:<br/> 
+                          {log.contents.map( (content:string, index) => (
+                              <p key={index} className="font-normal text-sm">- -{content}</p>
+                          ))}
+                          
+                        </li>
+                      ))
+                    }
+              
 
 
 
                     
                   </ul>
 
-                  <Button
-                    label="Close"
-                    onClickHandler={() => setOpenChange(false)}
-                    className="items-end mb-2 mt-2 ml-2 bg-red-500 hover:bg-red-600"
-                  />  
 
                   
                 

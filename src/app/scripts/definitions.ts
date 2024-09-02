@@ -41,3 +41,10 @@ export const CommandObjectListInit = (name : string, sequence : CommandIconObjec
     sequence : sequence
   }
 }
+
+
+export interface ChangeLog{
+  title: string,
+  contents: string[],
+  date: Date
+}
