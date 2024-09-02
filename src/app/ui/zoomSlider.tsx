@@ -36,7 +36,7 @@ export default function ZoomSlider() {
         step={null}
         valueLabelDisplay="auto"
         marks={marks}
-        className='text-green-500'
+        
       />
     </Box>
   );
