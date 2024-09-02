@@ -2,7 +2,7 @@
 
 import { Command, CommandObject, CommandObjectList, CommandObjectListInit } from "./scripts/definitions";
 import { generateIcons, translateCombo} from '@/app/scripts/translator';
-import { GenerateComboCode } from "./scripts/utils";
+import { CompressCombo, DecompressCombo, GenerateComboCode } from "./scripts/utils";
 import { useEffect, useState } from "react";
 
 
@@ -17,10 +17,17 @@ import domToImage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
 import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
+import ZoomSlider from "./ui/zoomSlider";
+
 
 export default function Home() {
   const VERSION = 'alpha v0.2.2';
-  const [comboInput, setComboInput] = useState('d.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2');
+
+  const queryParameters = new URLSearchParams(window.location.search)
+  const shareInput = queryParameters.get("share")
+  const initialCombo = shareInput? DecompressCombo(shareInput) : 'd.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2';
+
+  const [comboInput, setComboInput] = useState(initialCombo);
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
   const [useD, setUseD] = useState(true);
@@ -28,7 +35,7 @@ export default function Home() {
   const [ig5, setIg5] = useState(true)
   const [renameInput, setRenameInput] = useState('');
 
-  const [inputHistory, setInputHistory] = useState<string[]>(['d.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2']);
+  const [inputHistory, setInputHistory] = useState<string[]>([initialCombo]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -137,8 +144,17 @@ const onChangeComboInput = (comboInput : string) => {
     console.log(node.tagName)
     return node.tagName  !== 'SPAN';
   }
-  const handlerShareCode = () => {
-    return window.alert("Not implemented yet! Check soon");
+  const handlerShareCode = async () => {
+
+    
+    try{
+      const copy = await handleCopy();
+      if (copy)
+        return window.alert("Code copied");
+    } catch (err){
+      return window.alert(`Copy failled contact support ${err}`);
+    }
+    
   }
 
   const handlerGeneratePng = async () => {
@@ -163,6 +179,19 @@ const onChangeComboInput = (comboInput : string) => {
   function handlerIgdotChange(value : boolean){
     setIgnoreDot(value);
   }
+
+  const handleCopy = async () => {
+    try {
+
+
+      await navigator.clipboard.writeText(window.location.origin+'?share='+ CompressCombo(comboInput));
+      //console.log('Copied to clipboard:', CompressCombo(comboInput));
+      return true;
+    } catch (error) {
+      console.error('Unable to copy to clipboard:', error);
+      throw error;
+    }
+  };
 
 
   /* effect change igdot and useD*/
@@ -394,13 +423,13 @@ const onChangeComboInput = (comboInput : string) => {
 
           <FormControlLabel control={
             <Switch
-            className="text-sm md:text-nm"
+            className="text-sm md:text-nm "
             checked={ignoreDot}
             onChange={(e) => handlerIgdotChange(e.target.checked)}
              inputProps={{ 'aria-label': 'Ignore dots' }
              }/>} 
             
-             label={<Typography className="text-sm md:text-nm">Ignore dots</Typography>}
+             label={<Typography className="text-sm md:text-nm ">Ignore dots</Typography>}
              className="hover:text-green-500 transition-all hover:pl-1"
 
           />
@@ -415,6 +444,9 @@ const onChangeComboInput = (comboInput : string) => {
             
              label={<Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Ignore neutral "5"</Typography>}     
             />
+          <Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Icon Size</Typography>
+          <ZoomSlider/>
+        
           
 
         </FormGroup>
