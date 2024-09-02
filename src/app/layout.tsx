@@ -8,7 +8,7 @@ import { normalFont } from "./ui/fonts";
 
 import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
 
-export const theme = createTheme ({
+const theme = createTheme ({
   palette: {
     mode: 'dark',
     primary: {
