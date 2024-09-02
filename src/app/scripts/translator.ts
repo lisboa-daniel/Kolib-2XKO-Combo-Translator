@@ -65,7 +65,7 @@ export function generateIcons(combo_array : Command[], size : number): CommandOb
                 "[": 16,
                 "]": 16,
                 "5": 52,
-                'bb':52,
+                'bb': 52,
    
               };
 

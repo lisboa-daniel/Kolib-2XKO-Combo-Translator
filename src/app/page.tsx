@@ -653,7 +653,7 @@ const onChangeComboInput = (comboInput : string) => {
           <p>Made by: @dandy_kyun on Twitter and Discord </p>
 
           <div className="flex flex-row justify-center w-full items-center">
-            <a href="https://github.com/lisboa-daniel/kolib" className="hover:text-white ml-2 underline"><GitHub className="mr-1"/>GitHub Repo</a> <p className="hover:text-white ml-2 cursor-pointer underline" onClick={() => setOpenChange(true)}>  Change Log</p>
+            <a href="https://github.com/lisboa-daniel/Kolib-2XKO-Combo-Translator" className="hover:text-white ml-2 underline"><GitHub className="mr-1"/>GitHub Repo</a> <p className="hover:text-white ml-2 cursor-pointer underline" onClick={() => setOpenChange(true)}>  Change Log</p>
           </div>
         </footer>
 
