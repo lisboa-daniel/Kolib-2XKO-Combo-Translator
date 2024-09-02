@@ -19,7 +19,7 @@ function findCommand(key: string): Command | undefined {
 }
 
 
-export function generateIcons(combo_array : Command[]): CommandObject[] {
+export function generateIcons(combo_array : Command[], size : number): CommandObject[] {
     let results : CommandObject[] = []
     //let icons : CommandIconObject[] = [];
     //let commandText : CommandTextObject[] = [];
@@ -69,8 +69,9 @@ export function generateIcons(combo_array : Command[]): CommandObject[] {
    
               };
 
-            const customSize: number | undefined = customSizeDict[command.key];
+            let customSize: number | undefined = customSizeDict[command.key];
             
+            customSize = customSize * size;
             //push the icons
             results.push(CommandIcon(
                 {

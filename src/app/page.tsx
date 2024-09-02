@@ -42,10 +42,12 @@ export default function Home() {
   const handleClose = () => setOpen(false);
 
 
-  const [openRename, setOpenRename,] = useState(false);
+  const [openRename, setOpenRename] = useState(false);
 
 
-  const [openChange, setOpenChange,] = useState(false);
+  const [openChange, setOpenChange] = useState(false);
+
+  const [zoomValue, setZoomValue] = useState(1.5);
 
   const handleOpenRename = () => {
     setRenameInput(comboLines[activeLine].name);
@@ -57,11 +59,12 @@ export default function Home() {
   const [comboText, comboArray] =  translateCombo(comboInput, {
     igDot: ignoreDot,
     useD: useD,
-    ig5: ig5
+    ig5: ig5,
+    size : zoomValue
   });
 
   
-  let iconCombo = generateIcons(comboArray);
+  let iconCombo = generateIcons(comboArray, zoomValue);
 
   setCommandCombo(iconCombo);
   setComboTranslation(comboText);
@@ -197,7 +200,7 @@ const onChangeComboInput = (comboInput : string) => {
   /* effect change igdot and useD*/
   useEffect( () => {
     handleClick(comboInput);
-  },[ignoreDot, useD, ig5])
+  },[ignoreDot, useD, ig5, zoomValue])
 
 
   
@@ -445,7 +448,11 @@ const onChangeComboInput = (comboInput : string) => {
              label={<Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Ignore neutral "5"</Typography>}     
             />
           <Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Icon Size</Typography>
-          <ZoomSlider/>
+
+          <div className="ml-5">
+            <ZoomSlider value={zoomValue} setValue={setZoomValue}/>
+          </div>
+
         
           
 

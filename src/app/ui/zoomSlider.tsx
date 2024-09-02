@@ -4,15 +4,15 @@ import Slider from '@mui/material/Slider';
 
 const marks = [
   {
-    value: 0,
+    value: 0.5,
     label: 'Small',
   },
   {
-    value: 30,
+    value: 1,
     label: 'Medium',
   },
   {
-    value: 60,
+    value: 2,
     label: 'Big',
   },
 
@@ -23,19 +23,29 @@ function valuetext(value: number) {
 }
 
 interface ZoomSliderProps{
-
+  value : number;
+  setValue : (n : number) => void;
 }
 
-export default function ZoomSlider() {
+export default function ZoomSlider({value, setValue} : ZoomSliderProps) {
+
+  function handleChange(event: Event, value: number | number[], activeThumb: number): void {
+    setValue(value as number);
+  }
+
   return (
-    <Box  sx={{ width: 250 }}>
+    <Box  sx={{ width: 200 }}>
       <Slider
-        aria-label="Restricted values"
-        defaultValue={0}
+        aria-label="Zoom slider"
+        defaultValue={value}
+        value={value}
+        max={4}
+        min={0.5}
         getAriaValueText={valuetext}
-        step={null}
-        valueLabelDisplay="auto"
-        marks={marks}
+        step={0.5}
+        onChange={handleChange}
+        valueLabelDisplay={'auto'}
+        
         
       />
     </Box>

@@ -24,7 +24,8 @@ export interface Command {
 export interface TranslationSettings {
   igDot : boolean,
   useD : boolean,
-  ig5: boolean
+  ig5: boolean,
+  size : number
 }
 
 export interface CommandObjectList{
