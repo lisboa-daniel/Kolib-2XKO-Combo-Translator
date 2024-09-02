@@ -18,14 +18,26 @@ import { saveAs } from 'file-saver';
 import Button  from "./ui/button";
 import { COMMANDS } from "./scripts/dict";
 import ZoomSlider from "./ui/zoomSlider";
-
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Home() {
+
+
+
+  const retrieveParams = () => {
+    const queryParameters = useSearchParams();
+    const shareInput = queryParameters.get("share")
+    return shareInput ? DecompressCombo(shareInput) : 'd.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2'
+  }
+ 
+
+
+    
+
   const VERSION = 'alpha v0.2.2';
 
-  const queryParameters = new URLSearchParams(window.location.search)
-  const shareInput = queryParameters.get("share")
-  const initialCombo = shareInput? DecompressCombo(shareInput) : 'd.L > 5L > 5M > 5H > S1> S1 > ff >  5H > 5M > df.H>j.H> m>s2';
+  
+  const initialCombo = retrieveParams();
 
   const [comboInput, setComboInput] = useState(initialCombo);
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
