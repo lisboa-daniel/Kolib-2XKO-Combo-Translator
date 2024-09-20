@@ -33,10 +33,6 @@ export default function Home() {
  
 
 
-    
-
-  
-
   
   const initialCombo = retrieveParams();
 
