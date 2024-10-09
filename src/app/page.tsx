@@ -32,10 +32,14 @@ export default function Home() {
   }
  
 
+  //Control variables
+  const [activeLine, setActiveLine] = useState(0);
+  const [comboLines, setComboLines] = useState<CommandObjectList[]> ([
+    CommandObjectListInit('Default Row', [])
+  ]);
 
-  
+  /*Form Fields handlers*/ 
   const initialCombo = retrieveParams();
-
   const [comboInput, setComboInput] = useState(initialCombo);
   const [commandCombo, setCommandCombo] = useState<CommandObject[]>([]);
   const [comboTranslation, setComboTranslation] = useState('');
@@ -43,48 +47,28 @@ export default function Home() {
   let [ignoreDot, setIgnoreDot] = useState(false)
   const [ig5, setIg5] = useState(true)
   const [renameInput, setRenameInput] = useState('');
-
   const [inputHistory, setInputHistory] = useState<string[]>([initialCombo]);
 
+
+  // Modal Handlers
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   const [openRename, setOpenRename] = useState(false);
-
-
   const [openChange, setOpenChange] = useState(false);
 
-  const [zoomValue, setZoomValue] = useState(1.5);
-
-  const handleOpenRename = () => {
+    const handleOpenRename = () => {
     setRenameInput(comboLines[activeLine].name);
     setOpenRename(true);
   }
+  
   const handleCloseRename = () => setOpenRename(false);
-  
-  const handleClick = (comboInput: string) => {
-  const [comboText, comboArray] =  translateCombo(comboInput, {
-    igDot: ignoreDot,
-    useD: useD,
-    ig5: ig5,
-    size : zoomValue
-  });
 
-  
-  let iconCombo = generateIcons(comboArray, zoomValue);
+  // Field Handlers
+  const [zoomValue, setZoomValue] = useState(1.5);
 
-  setCommandCombo(iconCombo);
-  setComboTranslation(comboText);
-
-
-  comboLines[activeLine].sequence = iconCombo;
-
-
-}
-
-const onChangeComboInput = (comboInput : string) => {
+  const onChangeComboInput = (comboInput : string) => {
 
   let prevInput = inputHistory;
 
@@ -94,18 +78,10 @@ const onChangeComboInput = (comboInput : string) => {
 
   setComboInput(comboInput);
   handleClick(comboInput);
-}
+  }  
 
-
-
-  const [activeLine, setActiveLine] = useState(0);
-
-
-  const [comboLines, setComboLines] = useState<CommandObjectList[]> ([
-    CommandObjectListInit('Default Row', [])
-  ]);
-
-  const handlerAddRow = () => {
+  // Button handlers
+    const handlerAddRow = () => {
     setRowCounter(rowCounter+1);
 
     setComboLines( [...comboLines,  
@@ -150,7 +126,26 @@ const onChangeComboInput = (comboInput : string) => {
   }
 
 
-  //const [svgResult, setSvgResult] = useState();
+  //Process translation
+  const handleClick = (comboInput: string) => {
+  const [comboText, comboArray] =  translateCombo(comboInput, {
+    igDot: ignoreDot,
+    useD: useD,
+    ig5: ig5,
+    size : zoomValue
+  });
+
+  
+  let iconCombo = generateIcons(comboArray, zoomValue);
+
+  setCommandCombo(iconCombo);
+  setComboTranslation(comboText);
+
+
+  comboLines[activeLine].sequence = iconCombo;
+
+
+}
 
   function filter(node : any) {
     console.log(node.tagName)
@@ -183,7 +178,6 @@ const onChangeComboInput = (comboInput : string) => {
   }}).then(function (blob : Blob) {
     saveAs(blob, `combo: ${new Date().toLocaleDateString()}_${GenerateComboCode()}.png`);
   });
-
 
   }
 
