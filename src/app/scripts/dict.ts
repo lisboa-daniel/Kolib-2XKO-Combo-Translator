@@ -146,7 +146,13 @@ export const COMMANDS: Command[] = [
       key: "(h)",
       icon: "critical_strike.svg", // Ymight specfic icon be added
       alias: ["critical strike"],
-      alt: "[h]",
+      alt: "",
+    },
+    {
+      key: "[h]",
+      icon: "critical_strike2.svg", // Ymight specfic icon be added
+      alias: ["critical strike"],
+      alt: "",
     },
     {
       key: "\\dh",
@@ -166,7 +172,13 @@ export const COMMANDS: Command[] = [
       key: "(t)",
       icon: "team_button_hold.svg", 
       alias: ["quick tag"],
-      alt: "[t]",
+      alt: "",
+    },
+    {
+      key: "[t]",
+      icon: "team_button_hold2.svg", 
+      alias: ["quick tag"],
+      alt: "",
     },
     {
       key: "ft",
@@ -204,7 +216,7 @@ export const COMMANDS: Command[] = [
       alias: ["→",">"],
       alt: "",
     },
-    {
+    /*{
       key: "(",
       icon: "open_pam.svg",
       alias: ["("],
@@ -227,7 +239,7 @@ export const COMMANDS: Command[] = [
       icon: "close_pam2.svg",
       alias: ["]"],
       alt: "",
-    },
+    },*/
 
     
 ];

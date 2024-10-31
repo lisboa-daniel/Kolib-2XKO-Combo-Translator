@@ -56,14 +56,16 @@ export function generateIcons(combo_array : Command[], size : number): CommandOb
                 "ff": 52,
                 "ff2": 52,
                 "(t)": 90,
+                "[t]": 90,
                 "bt": 90,
                 "ft": 90,
-                "(": 16,
-                ")": 16,
+                //"(": 52,
+                //")": 52,
                 "\\dh": 90,
                 "(h)": 90,
-                "[": 16,
-                "]": 16,
+                "[h]": 90,
+                //"[": 52,
+                //"]": 52,
                 "5": 52,
                 'bb': 52,
    
@@ -84,8 +86,18 @@ export function generateIcons(combo_array : Command[], size : number): CommandOb
         } else {
           //if there's no icon then push a text object
           console.log(`No image found for command: ${command.alias[0]}`);
+
+          //exceptions for alias translation as icon [not utilized]
+          let exceptAlias = ['(t)', '[t]'];
+          let commandAlias = command.alias[0]
+          if (exceptAlias.find( key => command.key === key) != undefined){
+            commandAlias = command.key;
+            console.log(`found except alias ${commandAlias}`)
+          }
+              
+
           results.push(CommandText({
-            text: command.alias[0],
+            text: commandAlias,
             style:''
           }
 
@@ -256,6 +268,13 @@ export function translateCombo(comboInput : string, settings : TranslationSettin
 
     // replace all commas and ">" with " → " and trim any extra spaces
     result_str = result_str.replace(/,/g, " → ").replace(/>/g, " → ").trim();
+    
+    //actions with hold paranthesis text translation
+    result_str = result_str.replace(/\(\s*([^\s).]+(?:\s[^\s).]+)?)\s*\)/g, " hold $1 ").trim();
+
+    //actions with hold brackets text translation
+    result_str = result_str.replace(/\[\s*([^\s\]).+?(?:\s[^\s\]].+?)?\s*\]/g, " hold $1 ").trim();
+
 
     //return text and object with icon, alt, text, etc
     return [result_str, combo_array];

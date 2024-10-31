@@ -317,7 +317,7 @@ export default function Home() {
                       {cmd.alias.map((word, index) => (
                         <span key={index} className="mr-1">{word} </span>
                       ))}
-                      <img width={'32px'} height={'32px'} className="pl-2" src={'commands/'+cmd.icon}></img>
+                      <img width={"52px"} className="pl-2" src={'commands/'+cmd.icon}></img>
                     </span>
                   </li>
                 ))}
@@ -613,7 +613,7 @@ export default function Home() {
                       CHANGELOG.map( (log:ChangeLog, index) => (
                         <li key={index} className="font-extrabold mt-2">{log.title}:<br/> 
                           {log.contents.map( (content:string, index) => (
-                              <p key={index} className="font-normal text-sm">- -{content}</p>
+                              <p key={index} className="font-normal text-sm">- {content}</p>
                           ))}
                           
                         </li>
@@ -636,7 +636,7 @@ export default function Home() {
         <footer className="bg-green-500 w-full text-gray-900 py-4 px-6 text-center font-extrabold text-sm">
           <div className="flex justify-center space-x-4">
           <p className="mt-2">
-            This is a free tool made by a fan for the FGC / 2XKO community. All rights reserved for Riot Games © 2024
+            This is a free tool made by a fan for the FGC / 2XKO community. 2XKO have all rights reserved for Riot Games © 2024
           </p>
           </div>
   
