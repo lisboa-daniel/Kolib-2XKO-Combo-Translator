@@ -5,13 +5,13 @@ import Connect from '@/app/lib/conn';
 
 
 export async function getData() {
-    try {
-         const sql = await Connect();
+    // try {
+    //      const sql = await Connect();
 
-        const data = await sql`SELECT * FROM USERS`;
-        return data;
-    } catch (err:any) {
-        throw err;
-    }
+    //     const data = await sql`SELECT * FROM Users`;
+    //     return data;
+    // } catch (err:any) {
+    //     throw err;
+    // }
   
 }

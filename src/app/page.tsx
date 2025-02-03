@@ -20,6 +20,7 @@ import { COMMANDS } from "./scripts/dict";
 import ZoomSlider from "./ui/zoomSlider";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CHANGELOG, VERSION } from "./scripts/changelog";
+import { CommandIcon } from "./ui/icons";
 
 export default function Home() {
 
@@ -261,17 +262,19 @@ export default function Home() {
 
             <div className="w-full flex flex-row items-center justify-end">
 
-            <div className="bg-black">
+                <div className="bg-black">
 
-           
-              <Button
-                label="Command List"
-                onClickHandler={handleOpen}
-                className=" m-3 items-end bg-green-500 hover:bg-green-600"
-              />  
+              
+                  <Button
+                    label="Command List"
+                    onClickHandler={handleOpen}
+                    className=" m-3 items-end bg-green-500 hover:bg-green-600"
+                  />  
 
-            </div>
-            
+                </div>
+
+    
+                                    
             
   
             </div>
@@ -403,9 +406,9 @@ export default function Home() {
           <p className="text-green-400"><Circle className="w-[12px] h-[12px]"/> Tips</p>
           <div className="ml-5 text-nm tracking-wide">
 
-          <p>You can use quotes (" ") to write anything you like to add, observations or specific notation, anything!</p>
-          <p>To me is more elegant to use ( ) or [ ] for hold buttons but feel free, you can just write "hold" too.</p>  
-          <p>Both numpad and "Tekken" movement style is supported. Check more on command list.</p>
+          <p>You can use quotes (" ") to comment anything you like to add, observations or specific notation, anything!</p>
+          <p>To me is more elegant to use ( ) or [ ] for hold buttons but feel free, you can just write "hold" too as a comment.</p>  
+          <p>Both numpad and letter "Tekken like" notations for movement is supported. Check more on command list.</p>
           </div>
         </div>
 
@@ -450,11 +453,7 @@ export default function Home() {
             
              label={<Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Ignore neutral "5"</Typography>}     
             />
-          <Typography className="text-sm md:text-nm hover:text-green-500 transition-all hover:pl-1">Icon Size</Typography>
-
-          <div className="ml-5">
-            <ZoomSlider value={zoomValue} setValue={setZoomValue}/>
-          </div>
+       
 
         
           
@@ -531,6 +530,20 @@ export default function Home() {
                           className="bg-pink-400 hover:bg-pink-500"
                         />
                     </span>
+
+
+                    <div className="flex flex-col">
+
+                      <label className={`${boldFont.className} w-full justify-center items-center flex flex-row`}>
+                      <Typography className={`${boldFont.className} text-sm font-bold md:text-nm text-[#1c1c1c] bg-green-500 p-1 transition-all hover:pl-1`}>Icon Size</Typography>
+                      </label>
+
+
+                      <div className="ml-2 mr-2">
+                        <ZoomSlider value={zoomValue} setValue={setZoomValue}/>
+                      </div>
+
+                    </div>
                   
                   </div>
 
@@ -640,7 +653,13 @@ export default function Home() {
           </p>
           </div>
   
-          <p>Made by: @dandy_kyun on Twitter and Discord </p>
+            <p id="credit" className="w-full justify-center flex flex-row">
+            Made by:&nbsp;{CommandIcon({src:"discord_logo.svg", w: 48, h: 48,alt:"bsky", style:""}).node}&nbsp;@dandy_kyun&nbsp; 
+             
+             
+            {CommandIcon({src:"bluesky_logo.svg", w: 48, h: 48,alt:"bsky", style:""}).node}&nbsp;<a className="hover:underline" href="https://bsky.app/profile/dandykyun.bsky.social"> @dandykyun.bsky.social</a>
+            </p> 
+         
 
           <div className="flex flex-row justify-center w-full items-center">
             <a href="https://github.com/lisboa-daniel/Kolib-2XKO-Combo-Translator" className="hover:text-white ml-2 underline"><GitHub className="mr-1"/>GitHub Repo</a> <p className="hover:text-white ml-2 cursor-pointer underline" onClick={() => setOpenChange(true)}>  Change Log</p>

@@ -42,7 +42,7 @@ export default function ZoomSlider({value, setValue} : ZoomSliderProps) {
         max={4}
         min={0.5}
         getAriaValueText={valuetext}
-        step={0.5}
+        step={0.1}
         onChange={handleChange}
         valueLabelDisplay={'auto'}
         
