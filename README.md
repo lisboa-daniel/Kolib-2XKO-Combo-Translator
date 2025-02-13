@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org/) project to translate input text from th
 - Able to read a translation in text of the inputs
 - Able to visualize the translation in icons
 - Able to generate PNG file of the translated input
-- In the future able to share the combo through a share code
+- Able to share the combo through a share code
 
 
 ## How to run this locally
