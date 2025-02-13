@@ -28,11 +28,11 @@ export default function Button(
   const isIconDefined = icon !== undefined;
 
   return(
-    <button onClick={onClickHandler} className={`flex justify-center items-center text-nm p-2 text-[#1c1c1c]  cursor-pointer font-extrabold mb-2 mt-2 ${boldFont.className}
+    <button onClick={onClickHandler} className={`flex justify-center items-center p-2 text-[#1c1c1c]  cursor-pointer font-extrabold mb-2 mt-2 ${boldFont.className}
     ${visible ? '' :'hidden'} ${className}`}> 
       {icon} 
       
-      <label className={`md:ml-1 text-sm cursor-pointer ${isIconDefined ? 'hidden md:flex' : 'flex'}`}>{label}</label>
+      <label className={`md:ml-1  cursor-pointer ${isIconDefined ? 'hidden md:flex' : 'flex'}`}>{label}</label>
 
     </button>
   );
