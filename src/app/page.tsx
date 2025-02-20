@@ -248,9 +248,9 @@ export default function Home() {
         <div id="form" className="flex flex-col w-[95%] md:w-[86%] top-[10%] fixed z-50">  
             <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-green-500">Combo recipe</label> 
 
-            <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-row items-center justify-between ">
 
-              <input value={comboInput} id="combo_input" className={'outline-none w-full text-sm md:text-xl p-2 '} defaultValue={comboInput} onChange={(e) => onChangeComboInput(e.target.value)} name="combo" type="text"/>
+              <input value={comboInput} id="combo_input" className={'outline-none md:w-full sm:min-w-[380px] text-sm md:text-xl p-2 '} defaultValue={comboInput} onChange={(e) => onChangeComboInput(e.target.value)} name="combo" type="text"/>
 
               <div className="bg-black">
               <input className={`text-nm md:text-xl p-2 ml-2 text-[#1c1c1c] bg-green-500 cursor-pointer hover:bg-green-600 font-extrabold ${boldFont.className}`} value={'GO'} type="submit" onClick={() => handleClick(comboInput)}/>

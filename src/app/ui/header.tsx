@@ -31,6 +31,22 @@ import { redirect } from "next/navigation";
   
 export function Header(){
 
+    const links = [
+      {
+        label: "Input translator",
+        href: "/translator"
+      },
+      {
+        label: "Combo recipe browser",
+        href: "/browser"
+      },
+      {
+        label: "Video overlay editor",
+        href: "/editor"
+      },
+
+    ]
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [menuOptions, setMenuOptions] = useState<boolean>(false);
 
@@ -138,39 +154,33 @@ export function Header(){
         <AppBar position="static" >
             <Toolbar className="bg-black">
 
-            <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                className="md:hidden"
-                sx={{ mr: 2 }}
-                onClick={() => setMenuOptions(!menuOptions)}
-            >
-                <MenuIcon />
-            </IconButton>
+            <div className="md:hidden">
 
+              <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  className=""
+                  sx={{ mr: 2 }}
+                  onClick={() => setMenuOptions(!menuOptions)}
+              >
+                  <MenuIcon />
+              </IconButton>
+            </div>
             <img src="/logo.svg" alt="logo" className="p-[1px] w-[64px] md:w-[72px] mt-6  md:mt-3 mr-2 ml-2 rounded-xl"/>
             <Typography className={`pr-3 ${boldFont.className}`}>
                 KOLIB
             </Typography>
             <div className={`hidden w-full flex-row md:flex `} >
 
-             
-
-                <MenuItem className={`${boldFont.className} hover:text-[#1c1c1c] hover:bg-green-400`}>
-                    <a className="hover:underline" href="#">Input translator</a>
-          
-                </MenuItem>
-
-                <MenuItem className={`${boldFont.className} hover:text-[#1c1c1c] hover:bg-green-400`}>
-                    <a className="hover:underline" href="#">Combo recipes browser</a>
-                </MenuItem>
-
-                <MenuItem className={`${boldFont.className} hover:text-[#1c1c1c] hover:bg-green-400`}>
-                    <a className="hover:underline" href="#">Video overlay editor</a>
-                </MenuItem>
-
+                {
+                  links.map(link => (
+                    <MenuItem className={`${boldFont.className} hover:text-[#1c1c1c] hover:bg-green-400`}>
+                      <a className="hover:underline" href={link.href}>{link.label}</a>                
+                    </MenuItem>
+                  ))
+                }
             </div>
     
 
@@ -202,7 +212,10 @@ export function Header(){
 
             </Toolbar>
         </AppBar>
+   
         {renderMobileMenu}
+    
+        
         {renderMenu}
 
             <div className={`${!menuOptions ? "bg-black h-0" : "flex-col h-26 bg-[#272727]"} w-full p-4   transition-all text-xl`}>
