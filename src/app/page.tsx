@@ -241,14 +241,7 @@ export default function Home() {
 
   return (
     <main className="text-sm md:text-nm flex  w-full flex-col items-start justify-between pl-2 pr-2 md:pl-24 md:pr-24  pb-12">
-      <div className="left-0 flex flex-row w-full items-start justify-center h-[170px] z-50 fixed bg-[#0e0e0e] ">
-
-        <img src="/logo.svg" alt="logo" className="bg-white p-[1px] w-[48px] md:w-[64px] mt-6  md:mt-3 mr-2 ml-2 rounded-xl "/>
-
-        <Title text="2XKO Combo Translator" style=" text-center text-xl md:text-4xl mt-8" />
-        <p className="text-left mt-8">&nbsp;{VERSION}</p>
-      </div>
-
+    
      
         <div id="form" className="flex flex-col w-[95%] md:w-[86%] top-[10%] fixed z-50">  
             <label className="text-[#1c1c1c] w-[120px] pl-1 pr-1 text-left text-sm mt-5 font-extrabold bg-green-500">Combo recipe</label> 
