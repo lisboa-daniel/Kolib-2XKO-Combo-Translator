@@ -1,0 +1,40 @@
+{
+  "name": "kolib-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@neondatabase/serverless": "^0.9.5",
+    "@prisma/client": "^5.20.0",
+    "dom-to-image-more": "^3.3.1",
+    "file-saver": "^2.0.5",
+    "lz-string": "^1.5.0",
+    "next": "^14.2.12",
+    "react": "^18",
+    "react-dom": "^18",
+    "styled-components": "^6.1.12",
+    "uuid4": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/dom-to-image": "^2.6.7",
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/uuid4": "^2.0.3",
+    "postcss": "^8",
+    "prisma": "^5.20.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
